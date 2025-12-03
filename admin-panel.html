@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Admin Panel - AgriNova</title>
+  <link href="assets/img/icon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/admin-panel.css" rel="stylesheet">
+  <style>
+    /* Toast - Inline backup */
+    .toast-container { position: fixed !important; top: 20px !important; right: 20px !important; z-index: 9999 !important; display: flex !important; flex-direction: column !important; gap: 10px !important; }
+    .toast { padding: 16px 24px !important; border-radius: 12px !important; color: white !important; display: flex !important; align-items: center !important; gap: 12px !important; box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important; min-width: 320px !important; animation: toastIn 0.4s ease-out !important; }
+    @keyframes toastIn { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+    .toast.success { background: linear-gradient(135deg, #28a745, #20c997) !important; }
+    .toast.error { background: linear-gradient(135deg, #d32f2f, #f44336) !important; }
+    .toast.info { background: linear-gradient(135deg, #1976d2, #42a5f5) !important; }
+    .toast.warning { background: linear-gradient(135deg, #f57c00, #ffb74d) !important; }
+    .toast i { font-size: 1.5rem !important; }
+    .toast-content { flex: 1 !important; }
+    .toast-content strong { display: block !important; font-weight: 600 !important; margin-bottom: 3px !important; }
+    .toast-content span { opacity: 0.9 !important; font-size: 0.9rem !important; }
+    .toast-close { background: none !important; border: none !important; color: white !important; cursor: pointer !important; font-size: 1.3rem !important; opacity: 0.8 !important; }
+    .toast-close:hover { opacity: 1 !important; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo"><i class="bi bi-leaf"></i></div>
+      <h2>AgriNova</h2>
+      <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="dashboard"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
+      <a href="#" class="nav-item" data-section="hero"><i class="bi bi-house"></i><span>Hero Bölümü</span></a>
+      <a href="#" class="nav-item" data-section="services"><i class="bi bi-gear"></i><span>Hizmetler</span></a>
+      <a href="#" class="nav-item" data-section="portfolio"><i class="bi bi-collection"></i><span>Projeler</span></a>
+      <a href="#" class="nav-item" data-section="team"><i class="bi bi-people"></i><span>Ekip</span></a>
+      <a href="#" class="nav-item" data-section="pricing"><i class="bi bi-currency-dollar"></i><span>Fiyatlandırma</span></a>
+      <a href="#" class="nav-item" data-section="faq"><i class="bi bi-question-circle"></i><span>S.S.S.</span></a>
+      <a href="#" class="nav-item" data-section="announcements"><i class="bi bi-megaphone"></i><span>Duyurular</span></a>
+      <a href="#" class="nav-item" data-section="testimonials"><i class="bi bi-chat-quote"></i><span>Yorumlar</span></a>
+      <a href="#" class="nav-item" data-section="contact"><i class="bi bi-envelope"></i><span>İletişim</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Siteyi Görüntüle</a>
+      <a href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Çıkış Yap</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="top-header">
+      <button class="menu-toggle" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+      <div class="header-right">
+        <span class="welcome">Hoş geldin, <strong id="adminName">Admin</strong></span>
+        <div class="user-avatar"><i class="bi bi-person-circle"></i></div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      <!-- Dashboard Section -->
+      <section id="section-dashboard" class="content-section active">
+        <h2><i class="bi bi-speedometer2"></i> Dashboard</h2>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon bg-primary"><i class="bi bi-collection"></i></div><div class="stat-info"><h3>9</h3><p>Toplam Proje</p></div></div>
+          <div class="stat-card"><div class="stat-icon bg-success"><i class="bi bi-people"></i></div><div class="stat-info"><h3>4</h3><p>Ekip Üyesi</p></div></div>
+          <div class="stat-card"><div class="stat-icon bg-warning"><i class="bi bi-megaphone"></i></div><div class="stat-info"><h3>3</h3><p>Aktif Duyuru</p></div></div>
+          <div class="stat-card"><div class="stat-icon bg-info"><i class="bi bi-chat-quote"></i></div><div class="stat-info"><h3>5</h3><p>Müşteri Yorumu</p></div></div>
+        </div>
+        <div class="quick-actions">
+          <h4>Hızlı İşlemler</h4>
+          <div class="action-buttons">
+            <button onclick="showSection('portfolio')" class="action-btn"><i class="bi bi-plus-circle"></i> Yeni Proje</button>
+            <button onclick="showSection('announcements')" class="action-btn"><i class="bi bi-megaphone"></i> Duyuru Ekle</button>
+            <button onclick="showSection('team')" class="action-btn"><i class="bi bi-person-plus"></i> Ekip Üyesi</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero Section -->
+      <section id="section-hero" class="content-section">
+        <h2><i class="bi bi-house"></i> Hero Bölümü</h2>
+        <div class="form-card">
+          <div class="form-group"><label>Ana Başlık</label><input type="text" id="heroTitle" value="Geleceğin Tarımı Bugün Başlıyor"></div>
+          <div class="form-group"><label>Alt Başlık (Slogan)</label><input type="text" id="heroSubtitle" value="Sürdürülebilir. Akıllı. Kârlı."></div>
+          <div class="form-group"><label>Buton Metni</label><input type="text" id="heroButton" value="Hakkımızda"></div>
+          <button class="btn-save" onclick="saveChanges('Hero Bölümü')"><i class="bi bi-check-lg"></i> Değişiklikleri Kaydet</button>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="section-services" class="content-section">
+        <h2><i class="bi bi-gear"></i> Hizmetler</h2>
+        <div class="data-table">
+          <table>
+            <thead><tr><th>İkon</th><th>Başlık</th><th>Açıklama</th><th>İşlemler</th></tr></thead>
+            <tbody id="servicesTable">
+            </tbody>
+          </table>
+        </div>
+        <button class="btn-add" onclick="openAddModal('service')"><i class="bi bi-plus-lg"></i> Yeni Hizmet Ekle</button>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section id="section-portfolio" class="content-section">
+        <h2><i class="bi bi-collection"></i> Projeler</h2>
+        <div class="cards-grid" id="portfolioGrid"></div>
+        <button class="btn-add" onclick="openAddModal('portfolio')"><i class="bi bi-plus-lg"></i> Yeni Proje Ekle</button>
+      </section>
+
+      <!-- Team Section -->
+      <section id="section-team" class="content-section">
+        <h2><i class="bi bi-people"></i> Ekip Üyeleri</h2>
+        <div class="cards-grid" id="teamGrid"></div>
+        <button class="btn-add" onclick="openAddModal('team')"><i class="bi bi-plus-lg"></i> Yeni Üye Ekle</button>
+      </section>
+
+      <!-- Pricing Section -->
+      <section id="section-pricing" class="content-section">
+        <h2><i class="bi bi-currency-dollar"></i> Fiyatlandırma Paketleri</h2>
+        <div class="cards-grid" id="pricingGrid"></div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="section-faq" class="content-section">
+        <h2><i class="bi bi-question-circle"></i> Sıkça Sorulan Sorular</h2>
+        <div class="faq-list" id="faqList"></div>
+        <button class="btn-add" onclick="openAddModal('faq')"><i class="bi bi-plus-lg"></i> Yeni Soru Ekle</button>
+      </section>
+
+      <!-- Announcements Section -->
+      <section id="section-announcements" class="content-section">
+        <h2><i class="bi bi-megaphone"></i> Duyurular</h2>
+        <div class="data-table">
+          <table>
+            <thead><tr><th>Tarih</th><th>Başlık</th><th>Durum</th><th>İşlemler</th></tr></thead>
+            <tbody id="announcementsTable"></tbody>
+          </table>
+        </div>
+        <button class="btn-add" onclick="openAddModal('announcement')"><i class="bi bi-plus-lg"></i> Yeni Duyuru Ekle</button>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="section-testimonials" class="content-section">
+        <h2><i class="bi bi-chat-quote"></i> Müşteri Yorumları</h2>
+        <div class="cards-grid" id="testimonialsGrid"></div>
+        <button class="btn-add" onclick="openAddModal('testimonial')"><i class="bi bi-plus-lg"></i> Yeni Yorum Ekle</button>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="section-contact" class="content-section">
+        <h2><i class="bi bi-envelope"></i> İletişim Bilgileri</h2>
+        <div class="form-card">
+          <div class="form-group"><label>E-posta</label><input type="email" value="kurumsaliletisim@kocaeli.edu.tr"></div>
+          <div class="form-group"><label>Telefon</label><input type="text" value="+90 (262) 303 10 43"></div>
+          <div class="form-group"><label>Adres</label><textarea rows="2">Kabaoğlu, Baki Komsuoğlu Bulvarı No:515, Umuttepe, 41001 İzmit/Kocaeli</textarea></div>
+          <button class="btn-save" onclick="saveChanges('İletişim Bilgileri')"><i class="bi bi-check-lg"></i> Değişiklikleri Kaydet</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-content">
+      <div class="modal-header"><h3 id="modalTitle">Düzenle</h3><button class="modal-close" onclick="closeModal()"><i class="bi bi-x-lg"></i></button></div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer"><button class="btn-cancel" onclick="closeModal()">İptal</button><button class="btn-save" onclick="saveModalChanges()"><i class="bi bi-check-lg"></i> Kaydet</button></div>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal-content modal-sm">
+      <div class="modal-header delete-header"><h3><i class="bi bi-exclamation-triangle"></i> Silme Onayı</h3><button class="modal-close" onclick="closeDeleteModal()"><i class="bi bi-x-lg"></i></button></div>
+      <div class="modal-body"><p id="deleteMessage">Bu öğeyi silmek istediğinizden emin misiniz?</p><p class="text-muted small">Bu işlem geri alınamaz.</p></div>
+      <div class="modal-footer"><button class="btn-cancel" onclick="closeDeleteModal()">İptal</button><button class="btn-delete-confirm" onclick="executeDelete()"><i class="bi bi-trash"></i> Sil</button></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+// ========== ADMIN PANEL JAVASCRIPT ==========
+
+// Global veri depoları
+var dataStore = {
+  portfolio: [
+    { id: 1, title: 'Mekândan Bağımsız Yüksek Verim', category: 'Dikey Tarım', client: 'Marmara Sera', img: 'assets/img/masonry-portfolio/dikey1.png', desc: 'Geleneksel tarıma göre %90 daha az su kullanarak yıl boyu üretim.' },
+    { id: 2, title: 'Hassas Damla Sulama Yönetimi', category: 'Akıllı Sulama', client: 'Ege Tarım', img: 'assets/img/masonry-portfolio/sulama1.png', desc: 'Topraktan aldığımız anlık verilerle kaynak israfını önleriz.' },
+    { id: 3, title: 'Tarladan Merkeze Anlık Veri Akışı', category: 'Veri Analizi', client: 'Trakya Çiftlikleri', img: 'assets/img/masonry-portfolio/veri1.png', desc: 'Milyonlarca veriyi güvenli şekilde aktararak süreçleri şeffaflaştırırız.' },
+    { id: 4, title: 'Kontrollü İklim, Üstün Kalite', category: 'Dikey Tarım', client: 'İstanbul Yeşil Sera', img: 'assets/img/masonry-portfolio/dikey2.png', desc: 'Sıcaklık, nem ve LED spektrumlarını optimize ederek kaliteli ürünler.' },
+    { id: 5, title: 'Toprak Nem ve Besin Sensörleri', category: 'Akıllı Sulama', client: 'Antalya Seracılık', img: 'assets/img/masonry-portfolio/sulama2.png', desc: 'Nem, pH ve sıcaklık seviyelerini sürekli takip eden sensörler.' },
+    { id: 6, title: 'Gelişmiş Tarımsal Kontrol Panelleri', category: 'Veri Analizi', client: 'Konya Tarım', img: 'assets/img/masonry-portfolio/veri2.png', desc: 'Zorlu tarım koşullarında kesintisiz veri işleme performansı.' }
+  ],
+  team: [
+    { id: 1, name: 'Dr. Ahmet Yılmaz', position: 'Ziraat Yüksek Mühendisi', img: 'assets/img/team/team-1.jpg' },
+    { id: 2, name: 'Elif Kaya', position: 'Tarım Veri Bilimcisi', img: 'assets/img/team/team-2.jpg' },
+    { id: 3, name: 'Mehmet Demir', position: 'IoT Donanım Geliştiricisi', img: 'assets/img/team/team-3.jpg' },
+    { id: 4, name: 'Zeynep Arslan', position: 'Endüstriyel Otomasyon Uzmanı', img: 'assets/img/team/team-4.jpg' }
+  ],
+  pricing: [
+    { id: 1, name: 'Temel Sulama', price: 19, features: 'Toprak Nem Sensörleri\nDamla Sulama Kontrolü\nMobil/Web Panel\nTemel Destek' },
+    { id: 2, name: 'Dikey Otomasyon', price: 49, features: 'LED Spektrum Yönetimi\nBesin Dozajlama\nDikey Sistem Kontrolü\n7/24 Destek' },
+    { id: 3, name: 'Veri ve Drone Analizi', price: 69, features: 'Gerçek Zamanlı Veri\nDrone Gözetimi\nAI Raporları\n7/24 Destek' },
+    { id: 4, name: 'Tam Entegrasyon', price: 99, features: 'Tüm Özellikler\nÖncelikli Destek\nÖzel Hesap Yöneticisi' }
+  ],
+  faq: [
+    { id: 1, q: 'Akıllı Tarım Sisteminiz Su Tüketimini Azaltır mı?', a: 'Evet. Dikey Tarım çözümlerimiz %90 daha az su kullanır.' },
+    { id: 2, q: 'Sistem Kurulumu Ne Kadar Sürer?', a: 'Temel paketler 1-2 hafta, Tam Entegrasyon 4-6 hafta içinde tamamlanır.' },
+    { id: 3, q: 'Dron Analizleri Hangi Verileri Toplar?', a: 'Bitki sağlığı (NDVI), nem stres seviyesi ve toprak haritalaması.' },
+    { id: 4, q: 'Paketler Arası Geçiş Mümkün mü?', a: 'Evet, dilediğiniz zaman paket değişikliği yapabilirsiniz.' }
+  ],
+  announcements: [
+    { id: 1, date: '03 Aralık 2024', title: 'Yeni Drone Analiz Hizmeti', content: 'Yeni nesil drone filosumuzu hizmete sunduk.', status: 'active' },
+    { id: 2, date: '28 Kasım 2024', title: 'Kış Kampanyası Başladı', content: 'Tüm paketlerde %20 indirim!', status: 'active' },
+    { id: 3, date: '15 Kasım 2024', title: 'IoT Sensör Güncellemesi', content: 'Firmware güncellemesi tamamlandı.', status: 'active' }
+  ],
+  testimonials: [
+    { id: 1, name: 'Saul Goodman', position: 'Büyük Ölçekli Çiftlik Yöneticisi', comment: 'AgriNova ile çalışmak dönüm noktası oldu.', rating: 5, img: 'assets/img/testimonials/testimonials-1.jpg' },
+    { id: 2, name: 'Sara Wilsson', position: 'Sürdürülebilirlik Araştırmacısı', comment: 'Çevre dostu yaklaşımları etkileyici.', rating: 4, img: 'assets/img/testimonials/testimonials-2.jpg' },
+    { id: 3, name: 'Jena Karlis', position: 'Yatırım Fonu Yöneticisi', comment: 'Yatırım getirisi beklentilerin üzerinde.', rating: 5, img: 'assets/img/testimonials/testimonials-3.jpg' },
+    { id: 4, name: 'Matt Brandon', position: 'Kentsel Tarım Girişimcisi', comment: 'Şehir içi projemizde büyük destek aldık.', rating: 4, img: 'assets/img/testimonials/testimonials-4.jpg' },
+    { id: 5, name: 'John Larson', position: 'Ziraat Mühendisi', comment: 'Teknik ekipleri son derece profesyonel.', rating: 5, img: 'assets/img/testimonials/testimonials-5.jpg' }
+  ],
+  services: [
+    { id: 1, title: 'Akıllı Sulama', icon: 'bi-droplet-half', desc: 'Sensör tabanlı gerçek zamanlı veri analizi ile bitki ihtiyaçlarına göre en ideal su miktarını otomatik olarak sağlar.' },
+    { id: 2, title: 'Dikey Tarım Sistemleri', icon: 'bi-columns', desc: 'Şehir içi alanlarda, kapalı ve kontrollü ortamlarda, mevsimden bağımsız, yüksek verimli ürün yetiştirme çözümleri sunar.' },
+    { id: 3, title: 'Verim Optimizasyonu', icon: 'bi-graph-up-arrow', desc: 'Makine öğrenimi algoritmaları sayesinde tohumdan hasada kadar tüm süreçleri izler.' },
+    { id: 4, title: 'Sürdürülebilirlik Çözümleri', icon: 'bi-recycle', desc: 'Kimyasal kullanımını en aza indiren, enerji verimli ve çevre dostu uygulamalar.' }
+  ]
+};
+
+var deleteTarget = { type: '', name: '' };
+var currentEditType = '';
+var currentEditId = null;
+
+// Toast bildirimi
+function showToast(title, message, type) {
+  type = type || 'success';
+  var container = document.getElementById('toastContainer');
+  var icons = { success: 'check-circle-fill', error: 'x-circle-fill', warning: 'exclamation-triangle-fill', info: 'info-circle-fill' };
+  var toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  toast.innerHTML = '<i class="bi bi-' + icons[type] + '"></i><div class="toast-content"><strong>' + title + '</strong><span>' + message + '</span></div><button class="toast-close" onclick="this.parentElement.remove()"><i class="bi bi-x"></i></button>';
+  container.appendChild(toast);
+  setTimeout(function() { if (toast.parentNode) toast.remove(); }, 3000);
+}
+
+// Çıkış
+function logout() {
+  sessionStorage.removeItem('adminLoggedIn');
+  window.location.href = 'admin-login.html';
+}
+
+// Sidebar toggle
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Section göster
+function showSection(sectionName) {
+  var sections = document.querySelectorAll('.content-section');
+  var navItems = document.querySelectorAll('.nav-item');
+  for (var i = 0; i < sections.length; i++) sections[i].classList.remove('active');
+  for (var j = 0; j < navItems.length; j++) navItems[j].classList.remove('active');
+  document.getElementById('section-' + sectionName).classList.add('active');
+  var nav = document.querySelector('[data-section="' + sectionName + '"]');
+  if (nav) nav.classList.add('active');
+}
+
+// Kaydet
+function saveChanges(section) {
+  showToast('Başarılı!', section + ' bilgileri güncellendi.', 'success');
+}
+
+// Silme
+function confirmDelete(type, name) {
+  deleteTarget = { type: type, name: name };
+  document.getElementById('deleteMessage').textContent = '"' + name + '" silinsin mi?';
+  document.getElementById('deleteModal').classList.add('show');
+}
+function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('show'); }
+function executeDelete() {
+  closeDeleteModal();
+  showToast('Silindi!', deleteTarget.name + ' silindi.', 'error');
+}
+
+// Modal
+function getDataById(type, id) {
+  // service -> services, announcement -> announcements gibi çoğul isimleri kontrol et
+  var key = type;
+  if (type === 'service') key = 'services';
+  else if (type === 'announcement') key = 'announcements';
+  else if (type === 'testimonial') key = 'testimonials';
+  
+  var data = dataStore[key];
+  if (!data) return null;
+  for (var i = 0; i < data.length; i++) if (data[i].id === id) return data[i];
+  return null;
+}
+
+function openEditModal(type, id) {
+  currentEditType = type;
+  currentEditId = id;
+  var modal = document.getElementById('editModal');
+  var title = document.getElementById('modalTitle');
+  var body = document.getElementById('modalBody');
+  var data = id ? getDataById(type, id) : null;
+  var content = '';
+  
+  if (type === 'portfolio') {
+    var p = data || { title: '', category: 'Dikey Tarım', client: '', desc: '' };
+    title.textContent = id ? 'Proje Düzenle' : 'Yeni Proje';
+    content = '<div class="form-group"><label>Proje Adı</label><input type="text" value="' + p.title + '"></div>' +
+              '<div class="form-group"><label>Kategori</label><select><option' + (p.category==='Dikey Tarım'?' selected':'') + '>Dikey Tarım</option><option' + (p.category==='Akıllı Sulama'?' selected':'') + '>Akıllı Sulama</option><option' + (p.category==='Veri Analizi'?' selected':'') + '>Veri Analizi</option></select></div>' +
+              '<div class="form-group"><label>Müşteri</label><input type="text" value="' + p.client + '"></div>' +
+              '<div class="form-group"><label>Açıklama</label><textarea rows="3">' + (p.desc||'') + '</textarea></div>';
+  } else if (type === 'team') {
+    var t = data || { name: '', position: '', img: '' };
+    title.textContent = id ? 'Üye Düzenle' : 'Yeni Üye';
+    content = '<div class="form-group"><label>Ad Soyad</label><input type="text" value="' + t.name + '"></div>' +
+              '<div class="form-group"><label>Pozisyon</label><input type="text" value="' + t.position + '"></div>' +
+              '<div class="form-group"><label>Fotoğraf URL</label><input type="text" value="' + t.img + '"></div>';
+  } else if (type === 'pricing') {
+    var pk = data || { name: '', price: 0, features: '' };
+    title.textContent = id ? 'Paket Düzenle' : 'Yeni Paket';
+    content = '<div class="form-group"><label>Paket Adı</label><input type="text" value="' + pk.name + '"></div>' +
+              '<div class="form-group"><label>Fiyat ($)</label><input type="number" value="' + pk.price + '"></div>' +
+              '<div class="form-group"><label>Özellikler</label><textarea rows="4">' + pk.features + '</textarea></div>';
+  } else if (type === 'faq') {
+    var f = data || { q: '', a: '' };
+    title.textContent = id ? 'Soru Düzenle' : 'Yeni Soru';
+    content = '<div class="form-group"><label>Soru</label><input type="text" value="' + f.q + '"></div>' +
+              '<div class="form-group"><label>Cevap</label><textarea rows="3">' + f.a + '</textarea></div>';
+  } else if (type === 'announcement') {
+    var a = data || { title: '', content: '', status: 'active' };
+    title.textContent = id ? 'Duyuru Düzenle' : 'Yeni Duyuru';
+    content = '<div class="form-group"><label>Başlık</label><input type="text" value="' + a.title + '"></div>' +
+              '<div class="form-group"><label>İçerik</label><textarea rows="4">' + (a.content||'') + '</textarea></div>' +
+              '<div class="form-group"><label>Durum</label><select><option value="active"' + (a.status==='active'?' selected':'') + '>Aktif</option><option value="inactive"' + (a.status==='inactive'?' selected':'') + '>Pasif</option></select></div>';
+  } else if (type === 'testimonial') {
+    var ts = data || { name: '', position: '', comment: '', rating: 5 };
+    title.textContent = id ? 'Yorum Düzenle' : 'Yeni Yorum';
+    content = '<div class="form-group"><label>Müşteri Adı</label><input type="text" value="' + ts.name + '"></div>' +
+              '<div class="form-group"><label>Pozisyon</label><input type="text" value="' + ts.position + '"></div>' +
+              '<div class="form-group"><label>Yorum</label><textarea rows="3">' + (ts.comment||'') + '</textarea></div>' +
+              '<div class="form-group"><label>Puan (1-5)</label><input type="number" min="1" max="5" value="' + ts.rating + '"></div>';
+  } else if (type === 'service') {
+    var svc = data || { title: '', icon: 'bi-gear', desc: '' };
+    title.textContent = id ? 'Hizmet Düzenle' : 'Yeni Hizmet';
+    content = '<div class="form-group"><label>Başlık</label><input type="text" value="' + svc.title + '"></div>' +
+              '<div class="form-group"><label>İkon (Bootstrap Icons - örn: bi-droplet-half)</label><input type="text" value="' + svc.icon + '"></div>' +
+              '<div class="form-group"><label>Açıklama</label><textarea rows="3">' + svc.desc + '</textarea></div>';
+  }
+  body.innerHTML = content;
+  modal.classList.add('show');
+}
+
+function openAddModal(type) { openEditModal(type, null); }
+function closeModal() { document.getElementById('editModal').classList.remove('show'); }
+function saveModalChanges() {
+  closeModal();
+  showToast(currentEditId ? 'Güncellendi!' : 'Eklendi!', 'Kayıt başarıyla ' + (currentEditId ? 'güncellendi.' : 'oluşturuldu.'), currentEditId ? 'success' : 'info');
+}
+
+// Veri yükleme
+function loadAllData() {
+  loadServices(); loadPortfolio(); loadTeam(); loadPricing(); loadFAQ(); loadAnnouncements(); loadTestimonials();
+}
+
+function loadServices() {
+  var html = '';
+  for (var i = 0; i < dataStore.services.length; i++) {
+    var s = dataStore.services[i];
+    html += '<tr><td><i class="bi ' + s.icon + '"></i></td><td>' + s.title + '</td><td>' + s.desc.substring(0,50) + '...</td><td><button class="btn-edit" onclick="openEditModal(\'service\',' + s.id + ')"><i class="bi bi-pencil"></i></button><button class="btn-delete" onclick="confirmDelete(\'Hizmet\',\'' + s.title + '\')"><i class="bi bi-trash"></i></button></td></tr>';
+  }
+  document.getElementById('servicesTable').innerHTML = html;
+}
+
+function loadPortfolio() {
+  var html = '';
+  for (var i = 0; i < dataStore.portfolio.length; i++) {
+    var p = dataStore.portfolio[i];
+    html += '<div class="admin-card"><img src="' + p.img + '" alt=""><div class="admin-card-body"><h4>' + p.title + '</h4><p class="card-meta">' + p.category + ' | ' + p.client + '</p><div class="admin-card-actions"><button class="btn-edit" onclick="openEditModal(\'portfolio\',' + p.id + ')"><i class="bi bi-pencil"></i> Düzenle</button><button class="btn-delete" onclick="confirmDelete(\'Proje\',\'' + p.title + '\')"><i class="bi bi-trash"></i></button></div></div></div>';
+  }
+  document.getElementById('portfolioGrid').innerHTML = html;
+}
+
+function loadTeam() {
+  var html = '';
+  for (var i = 0; i < dataStore.team.length; i++) {
+    var t = dataStore.team[i];
+    html += '<div class="admin-card"><img src="' + t.img + '" alt=""><div class="admin-card-body"><h4>' + t.name + '</h4><p>' + t.position + '</p><div class="admin-card-actions"><button class="btn-edit" onclick="openEditModal(\'team\',' + t.id + ')"><i class="bi bi-pencil"></i> Düzenle</button><button class="btn-delete" onclick="confirmDelete(\'Üye\',\'' + t.name + '\')"><i class="bi bi-trash"></i></button></div></div></div>';
+  }
+  document.getElementById('teamGrid').innerHTML = html;
+}
+
+function loadPricing() {
+  var html = '';
+  for (var i = 0; i < dataStore.pricing.length; i++) {
+    var p = dataStore.pricing[i];
+    var feat = p.features.split('\n').map(function(f){return '<li>'+f+'</li>';}).join('');
+    html += '<div class="admin-card"><div class="admin-card-body"><h4>' + p.name + '</h4><p style="font-size:1.5rem;color:#28a745;font-weight:700;">$' + p.price + '/ay</p><ul style="font-size:0.85rem;color:#6c757d;">' + feat + '</ul><div class="admin-card-actions"><button class="btn-edit" onclick="openEditModal(\'pricing\',' + p.id + ')"><i class="bi bi-pencil"></i> Düzenle</button></div></div></div>';
+  }
+  document.getElementById('pricingGrid').innerHTML = html;
+}
+
+function loadFAQ() {
+  var html = '';
+  for (var i = 0; i < dataStore.faq.length; i++) {
+    var f = dataStore.faq[i];
+    html += '<div class="faq-item"><h4><i class="bi bi-question-circle"></i> ' + f.q + '</h4><p>' + f.a + '</p><div class="faq-actions"><button class="btn-edit" onclick="openEditModal(\'faq\',' + f.id + ')"><i class="bi bi-pencil"></i> Düzenle</button><button class="btn-delete" onclick="confirmDelete(\'Soru\',\'' + f.q.substring(0,20) + '...\')"><i class="bi bi-trash"></i></button></div></div>';
+  }
+  document.getElementById('faqList').innerHTML = html;
+}
+
+function loadAnnouncements() {
+  var html = '';
+  for (var i = 0; i < dataStore.announcements.length; i++) {
+    var a = dataStore.announcements[i];
+    html += '<tr><td>' + a.date + '</td><td>' + a.title + '</td><td><span class="status-badge status-' + a.status + '">' + (a.status==='active'?'Aktif':'Pasif') + '</span></td><td><button class="btn-edit" onclick="openEditModal(\'announcement\',' + a.id + ')"><i class="bi bi-pencil"></i></button><button class="btn-delete" onclick="confirmDelete(\'Duyuru\',\'' + a.title + '\')"><i class="bi bi-trash"></i></button></td></tr>';
+  }
+  document.getElementById('announcementsTable').innerHTML = html;
+}
+
+function loadTestimonials() {
+  var html = '';
+  for (var i = 0; i < dataStore.testimonials.length; i++) {
+    var t = dataStore.testimonials[i];
+    var stars = '';
+    for (var j = 0; j < 5; j++) stars += j < t.rating ? '★' : '☆';
+    html += '<div class="admin-card"><img src="' + t.img + '" alt="" style="height:120px;object-fit:cover;"><div class="admin-card-body"><h4>' + t.name + '</h4><p class="card-meta">' + t.position + '</p><p>' + stars + '</p><div class="admin-card-actions"><button class="btn-edit" onclick="openEditModal(\'testimonial\',' + t.id + ')"><i class="bi bi-pencil"></i> Düzenle</button><button class="btn-delete" onclick="confirmDelete(\'Yorum\',\'' + t.name + '\')"><i class="bi bi-trash"></i></button></div></div></div>';
+  }
+  document.getElementById('testimonialsGrid').innerHTML = html;
+}
+
+// Sayfa yüklendiğinde
+document.addEventListener('DOMContentLoaded', function() {
+  // Oturum kontrolü
+  if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+    window.location.href = 'admin-login.html';
+    return;
+  }
+  document.getElementById('adminName').textContent = sessionStorage.getItem('adminUser') || 'Admin';
+  
+  // Navigation
+  var navItems = document.querySelectorAll('.nav-item');
+  for (var i = 0; i < navItems.length; i++) {
+    navItems[i].onclick = function(e) {
+      e.preventDefault();
+      showSection(this.getAttribute('data-section'));
+    };
+  }
+  
+  // Verileri yükle
+  loadAllData();
+  
+  // Hoş geldin mesajı
+  setTimeout(function() {
+    showToast('Hoş Geldiniz!', 'Admin paneline giriş yaptınız.', 'success');
+  }, 500);
+});
+</script>
+</body>
+</html>
