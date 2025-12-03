@@ -131,6 +131,12 @@
                 </li>
                 <li><a href="service-details.html#drone">Drone Gözetim Hizmetleri</a></li>
                 <li><a href="service-details.html#veri">Veri Analizi Platformu</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="active"><span>Kurumsal</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="sayilarla.html">Sayılarla AgriNova</a></li>
+                <li><a href="duyurular.html">Duyurular</a></li>
                 <li><a href="starter-page.html" class="active">Kariyer</a></li>
               </ul>
             </li>
@@ -269,7 +275,7 @@
                 <li>Hidroponik/aeroponik sistemler deneyimi</li>
                 <li>Veri analizi ve raporlama becerileri</li>
               </ul>
-              <a href="index.html#contact" class="btn btn-outline-success btn-sm">Başvur</a>
+              <button onclick="openApplicationModal('Ziraat Mühendisi')" class="btn btn-outline-success btn-sm">Başvur</button>
             </div>
           </div>
 
@@ -290,7 +296,7 @@
                 <li>Python, R ve SQL deneyimi</li>
                 <li>Makine öğrenimi ve veri görselleştirme</li>
               </ul>
-              <a href="index.html#contact" class="btn btn-outline-success btn-sm">Başvur</a>
+              <button onclick="openApplicationModal('Veri Analisti')" class="btn btn-outline-success btn-sm">Başvur</button>
             </div>
           </div>
 
@@ -311,7 +317,7 @@
                 <li>Gömülü sistemler ve mikrodenetleyici deneyimi</li>
                 <li>PCB tasarımı ve prototipleme</li>
               </ul>
-              <a href="index.html#contact" class="btn btn-outline-success btn-sm">Başvur</a>
+              <button onclick="openApplicationModal('IoT Uzmanı')" class="btn btn-outline-success btn-sm">Başvur</button>
             </div>
           </div>
 
@@ -332,7 +338,7 @@
                 <li>Seyahat engeli olmayan</li>
                 <li>Güçlü iletişim ve problem çözme becerileri</li>
               </ul>
-              <a href="index.html#contact" class="btn btn-outline-success btn-sm">Başvur</a>
+              <button onclick="openApplicationModal('Satış Temsilcisi')" class="btn btn-outline-success btn-sm">Başvur</button>
             </div>
           </div>
 
@@ -471,30 +477,196 @@
 
   </footer>
 
+  <!-- İş Başvuru Modal -->
+  <div id="applicationModal" class="application-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5><i class="bi bi-person-plus"></i> İş Başvurusu</h5>
+        <button class="close-modal" onclick="closeApplicationModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="applicationForm" onsubmit="submitApplication(event)">
+          <div class="form-group">
+            <label>Ad Soyad *</label>
+            <input type="text" id="appName" required>
+          </div>
+          <div class="form-group">
+            <label>E-posta *</label>
+            <input type="email" id="appEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Telefon *</label>
+            <input type="tel" id="appPhone" required>
+          </div>
+          <div class="form-group">
+            <label>Başvurulan Pozisyon *</label>
+            <select id="appPosition" required>
+              <option value="">Seçiniz...</option>
+              <option value="Ziraat Mühendisi">Ziraat Mühendisi</option>
+              <option value="Yazılım Geliştirici">Yazılım Geliştirici</option>
+              <option value="IoT Uzmanı">IoT Uzmanı</option>
+              <option value="Veri Analisti">Veri Analisti</option>
+              <option value="Satış Temsilcisi">Satış Temsilcisi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Deneyim Süresi</label>
+            <select id="appExperience">
+              <option value="0-1">0-1 Yıl</option>
+              <option value="1-3">1-3 Yıl</option>
+              <option value="3-5">3-5 Yıl</option>
+              <option value="5+">5+ Yıl</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ön Yazı</label>
+            <textarea id="appCoverLetter" rows="4" placeholder="Kendinizi kısaca tanıtın..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit"><i class="bi bi-send"></i> Başvuruyu Gönder</button>
+        </form>
+        <div id="applicationSuccess" class="success-message" style="display:none;">
+          <i class="bi bi-check-circle-fill"></i>
+          <h4>Başvurunuz Alındı!</h4>
+          <p>En kısa sürede sizinle iletişime geçeceğiz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .application-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+    .application-modal.show { display: flex; }
+    .application-modal .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .application-modal .modal-header {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .application-modal .modal-header h5 { margin: 0; font-size: 1.2rem; }
+    .application-modal .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    .application-modal .modal-body { padding: 25px; max-height: 70vh; overflow-y: auto; }
+    .application-modal .form-group { margin-bottom: 15px; }
+    .application-modal .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #333; }
+    .application-modal .form-group input,
+    .application-modal .form-group select,
+    .application-modal .form-group textarea {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .application-modal .form-group input:focus,
+    .application-modal .form-group select:focus,
+    .application-modal .form-group textarea:focus {
+      border-color: #28a745;
+      outline: none;
+    }
+    .application-modal .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .application-modal .btn-submit:hover { transform: scale(1.02); }
+    .application-modal .success-message {
+      text-align: center;
+      padding: 30px;
+    }
+    .application-modal .success-message i {
+      font-size: 4rem;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    .application-modal .success-message h4 { color: #333; margin-bottom: 10px; }
+    .application-modal .success-message p { color: #666; }
+    html { scroll-behavior: smooth; }
+  </style>
+
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    var selectedPosition = '';
+    
+    function openApplicationModal(position) {
+      selectedPosition = position || '';
+      document.getElementById('applicationModal').classList.add('show');
+      document.getElementById('applicationForm').style.display = 'block';
+      document.getElementById('applicationSuccess').style.display = 'none';
+      if (position) {
+        document.getElementById('appPosition').value = position;
+      }
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeApplicationModal() {
+      document.getElementById('applicationModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    
+    function submitApplication(e) {
+      e.preventDefault();
+      document.getElementById('applicationForm').style.display = 'none';
+      document.getElementById('applicationSuccess').style.display = 'block';
+      
+      // 3 saniye sonra modal'ı kapat
+      setTimeout(function() {
+        closeApplicationModal();
+        document.getElementById('applicationForm').reset();
+      }, 3000);
+    }
+    
+    // Modal dışına tıklayınca kapat
+    document.getElementById('applicationModal').addEventListener('click', function(e) {
+      if (e.target === this) closeApplicationModal();
+    });
+  </script>
 
 </body>
 
