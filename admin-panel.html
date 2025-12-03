@@ -270,6 +270,29 @@
     </div>
   </div>
 
+  <!-- Application Detail Modal -->
+  <div class="modal-overlay" id="applicationModal">
+    <div class="modal-content" style="max-width:500px;">
+      <div class="modal-header" style="background:linear-gradient(135deg,#28a745,#20c997);color:white;">
+        <h3><i class="bi bi-person-badge"></i> Başvuru Detayı</h3>
+        <button class="modal-close" onclick="closeApplicationModal()" style="color:white;"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:15px;"><strong>Ad Soyad:</strong><p id="appDetailName" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>E-posta:</strong><p id="appDetailEmail" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Pozisyon:</strong><p id="appDetailPosition" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Deneyim:</strong><p id="appDetailExperience" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Başvuru Tarihi:</strong><p id="appDetailDate" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Durum:</strong><p id="appDetailStatus" style="margin:5px 0;"></p></div>
+      </div>
+      <div class="modal-footer" style="justify-content:flex-end;gap:10px;">
+        <button class="btn-cancel" onclick="updateApplicationStatus('rejected')" style="background:#dc3545;color:white;border:none;"><i class="bi bi-x-circle"></i> Reddet</button>
+        <button class="btn-cancel" onclick="updateApplicationStatus('interview')" style="background:#ffc107;color:#333;border:none;"><i class="bi bi-telephone"></i> Görüşmeye Çağır</button>
+        <button class="btn-save" onclick="updateApplicationStatus('hired')" style="background:#28a745;"><i class="bi bi-check-circle"></i> Onayla</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="toast-container" id="toastContainer"></div>
 
@@ -505,14 +528,44 @@ function loadApplications() {
   document.getElementById('applicationsTable').innerHTML = html;
 }
 
+var currentApplicationId = null;
+
 function viewApplication(id) {
   var a = null;
   for (var i = 0; i < dataStore.applications.length; i++) {
     if (dataStore.applications[i].id === id) { a = dataStore.applications[i]; break; }
   }
   if (a) {
-    alert('Başvuran: ' + a.name + '\nE-posta: ' + a.email + '\nPozisyon: ' + a.position + '\nDeneyim: ' + a.experience + ' Yıl');
+    currentApplicationId = id;
+    var statusLabels = { pending: 'Beklemede', interview: 'Görüşmeye Çağrıldı', rejected: 'Reddedildi', hired: 'İşe Alındı' };
+    document.getElementById('appDetailName').textContent = a.name;
+    document.getElementById('appDetailEmail').textContent = a.email;
+    document.getElementById('appDetailPosition').textContent = a.position;
+    document.getElementById('appDetailExperience').textContent = a.experience + ' Yıl';
+    document.getElementById('appDetailDate').textContent = a.date;
+    document.getElementById('appDetailStatus').textContent = statusLabels[a.status] || a.status;
+    document.getElementById('applicationModal').classList.add('show');
   }
+}
+
+function closeApplicationModal() {
+  document.getElementById('applicationModal').classList.remove('show');
+  currentApplicationId = null;
+}
+
+function updateApplicationStatus(newStatus) {
+  if (currentApplicationId === null) return;
+  for (var i = 0; i < dataStore.applications.length; i++) {
+    if (dataStore.applications[i].id === currentApplicationId) {
+      dataStore.applications[i].status = newStatus;
+      break;
+    }
+  }
+  var statusMessages = { rejected: 'Başvuru reddedildi.', interview: 'Aday görüşmeye çağrıldı.', hired: 'Aday işe alındı!' };
+  var statusTypes = { rejected: 'error', interview: 'warning', hired: 'success' };
+  closeApplicationModal();
+  loadApplications();
+  showToast('Durum Güncellendi', statusMessages[newStatus], statusTypes[newStatus]);
 }
 
 function loadMessages() {
