@@ -252,6 +252,24 @@
       line-height: 1.6;
     }
 
+    .btn-all-announcements {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .btn-all-announcements:hover {
+      background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+      color: white;
+    }
+    .btn-all-announcements i {
+      margin-right: 8px;
+    }
+
     /* Responsive */
     @media (max-width: 576px) {
       .sidebar-content {
@@ -278,7 +296,7 @@
   <div id="announcements-sidebar" class="announcements-sidebar">
     <div class="sidebar-toggle" onclick="toggleSidebar()">
       <i class="bi bi-megaphone-fill"></i>
-      <span class="badge">3</span>
+      <span class="badge">5</span>
     </div>
     <div class="sidebar-content">
       <div class="sidebar-header">
@@ -304,6 +322,19 @@
           <p>Yeni nesil toprak nem sensörlerimiz artık daha hassas ölçüm yapıyor...</p>
           <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
         </div>
+        <div class="announcement-item" onclick="openAnnouncementModal(4)">
+          <span class="announcement-date">01 Kasım 2024</span>
+          <h6>Yeni Ortaklık Anlaşması</h6>
+          <p>Türkiye'nin önde gelen sera üreticileriyle stratejik ortaklık...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <div class="announcement-item" onclick="openAnnouncementModal(5)">
+          <span class="announcement-date">20 Ekim 2024</span>
+          <h6>Mobil Uygulama Yayında</h6>
+          <p>AgriNova mobil uygulaması iOS ve Android'de kullanıma sunuldu...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <a href="duyurular.html" class="btn-all-announcements"><i class="bi bi-list-ul"></i> Tüm Duyuruları Gör</a>
       </div>
     </div>
   </div>
@@ -369,6 +400,12 @@
                 </li>
                 <li><a href="service-details.html#drone">Drone Gözetim Hizmetleri</a></li>
                 <li><a href="service-details.html#veri">Veri Analizi Platformu</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>Kurumsal</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="sayilarla.html">Sayılarla AgriNova</a></li>
+                <li><a href="duyurular.html">Duyurular</a></li>
                 <li><a href="starter-page.html">Kariyer</a></li>
               </ul>
             </li>
@@ -1493,6 +1530,41 @@
           <p><strong>Mevcut Müşterilerimiz İçin:</strong></p>
           <p>Temel Sulama ve Tam Entegrasyon paketlerini kullanan müşterilerimiz, mevcut sensörlerini yeni nesil sensörlerle <strong>%50 indirimli</strong> olarak değiştirebilir.</p>
           <p>Güncelleme randevusu almak için teknik destek hattımızı arayabilirsiniz.</p>
+        `
+      },
+      4: {
+        title: "Yeni Ortaklık Anlaşması",
+        date: "01 Kasım 2024",
+        content: `
+          <p>Değerli paydaşlarımız,</p>
+          <p>AgriNova olarak, Türkiye'nin önde gelen sera üreticileriyle <strong>stratejik ortaklık anlaşması</strong> imzaladık.</p>
+          <p><strong>Bu ortaklık kapsamında:</strong></p>
+          <ul>
+            <li>50+ sera tesisine akıllı tarım çözümleri entegrasyonu</li>
+            <li>Ortak Ar-Ge projeleri ile yeni ürün geliştirme</li>
+            <li>Bölgesel eğitim merkezleri kurulumu</li>
+            <li>Yerli sensör üretimi için yatırım planlaması</li>
+          </ul>
+          <p>Bu anlaşma, Türk tarımının dijital dönüşümünde önemli bir adım olacaktır.</p>
+        `
+      },
+      5: {
+        title: "Mobil Uygulama Yayında",
+        date: "20 Ekim 2024",
+        content: `
+          <p>Beklenen haber geldi!</p>
+          <p><strong>AgriNova Mobil Uygulaması</strong> artık iOS ve Android platformlarında kullanıma sunuldu.</p>
+          <p><strong>Uygulama Özellikleri:</strong></p>
+          <ul>
+            <li>Gerçek zamanlı sensör verileri takibi</li>
+            <li>Anlık bildirimler ve uyarılar</li>
+            <li>Uzaktan sulama kontrolü</li>
+            <li>Haftalık/aylık raporlar</li>
+            <li>Çoklu tarla yönetimi</li>
+            <li>Hava durumu entegrasyonu</li>
+          </ul>
+          <p><strong>İndirme Linkleri:</strong></p>
+          <p>App Store ve Google Play'de "AgriNova" aratarak uygulamayı ücretsiz indirebilirsiniz.</p>
         `
       }
     };

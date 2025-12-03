@@ -137,9 +137,12 @@ body { font-family: 'Roboto', sans-serif; background: #f0f2f5; display: flex; mi
 .toast.info { background: linear-gradient(135deg, #1976d2, #42a5f5); }
 
 /* Status Badge */
-.status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+.status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; display: inline-block; }
 .status-active { background: #e8f5e9; color: #2e7d32; }
 .status-inactive { background: #ffebee; color: #c62828; }
+.status-success { background: #e8f5e9; color: #2e7d32; }
+.status-warning { background: #fff3e0; color: #e65100; }
+.status-secondary { background: #eceff1; color: #546e7a; }
 
 /* Responsive */
 @media (max-width: 992px) {
