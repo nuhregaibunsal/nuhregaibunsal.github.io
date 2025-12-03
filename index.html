@@ -1448,13 +1448,120 @@
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
+  <!-- Preloader - Gelişmiş -->
   <div id="preloader">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="preloader-inner">
+      <div class="preloader-icon">
+        <i class="bi bi-leaf"></i>
+      </div>
+      <div class="preloader-text">AgriNova</div>
+    </div>
   </div>
+  <style>
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    #preloader.loaded {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .preloader-inner {
+      text-align: center;
+      color: white;
+    }
+    .preloader-icon {
+      font-size: 4rem;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .preloader-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 15px;
+      letter-spacing: 3px;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+  </style>
+
+  <!-- Çerez Bildirimi -->
+  <div id="cookieConsent" class="cookie-consent">
+    <div class="cookie-content">
+      <i class="bi bi-shield-check"></i>
+      <div class="cookie-text">
+        <strong>Çerez Kullanımı</strong>
+        <p>Size daha iyi bir deneyim sunmak için çerezleri kullanıyoruz. Sitemizi kullanarak <a href="#">Gizlilik Politikamızı</a> kabul etmiş olursunuz.</p>
+      </div>
+      <button onclick="acceptCookies()" class="cookie-btn">Kabul Et</button>
+    </div>
+  </div>
+  <style>
+    .cookie-consent {
+      position: fixed;
+      bottom: -200px;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 -5px 30px rgba(0,0,0,0.15);
+      z-index: 99998;
+      transition: bottom 0.5s ease;
+    }
+    .cookie-consent.show {
+      bottom: 0;
+    }
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .cookie-content > i {
+      font-size: 2.5rem;
+      color: #28a745;
+    }
+    .cookie-text {
+      flex: 1;
+      min-width: 250px;
+    }
+    .cookie-text strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .cookie-text p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .cookie-text a {
+      color: #28a745;
+    }
+    .cookie-btn {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cookie-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(40,167,69,0.3);
+    }
+  </style>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1605,7 +1712,69 @@
         closeAnnouncementModal();
       }
     });
+
+    // Çerez Bildirimi
+    function acceptCookies() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.getElementById('cookieConsent').classList.remove('show');
+    }
+
+    // Sayfa yüklendiğinde çerez kontrolü
+    window.addEventListener('load', function() {
+      // Preloader'ı kapat
+      setTimeout(function() {
+        document.getElementById('preloader').classList.add('loaded');
+      }, 1000);
+
+      // Çerez bildirimi göster
+      if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(function() {
+          document.getElementById('cookieConsent').classList.add('show');
+        }, 2000);
+      }
+    });
+
+    // Form Başarı Bildirimi
+    document.querySelectorAll('.php-email-form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const loading = this.querySelector('.loading');
+        const errorMsg = this.querySelector('.error-message');
+        const sentMsg = this.querySelector('.sent-message');
+        
+        loading.style.display = 'block';
+        errorMsg.style.display = 'none';
+        sentMsg.style.display = 'none';
+        
+        // Simüle edilmiş form gönderimi
+        setTimeout(function() {
+          loading.style.display = 'none';
+          sentMsg.style.display = 'block';
+          sentMsg.style.animation = 'fadeInUp 0.5s ease';
+          form.reset();
+          
+          // 5 saniye sonra mesajı gizle
+          setTimeout(function() {
+            sentMsg.style.display = 'none';
+          }, 5000);
+        }, 1500);
+      });
+    });
   </script>
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sent-message {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+      color: white !important;
+      padding: 15px 25px !important;
+      border-radius: 10px !important;
+      animation: fadeInUp 0.5s ease;
+    }
+  </style>
 
 </body>
 
