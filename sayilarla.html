@@ -363,27 +363,38 @@
   <script>
     AOS.init();
 
-    // Sayaç animasyonu
+    // Sayaç animasyonu - düzeltilmiş versiyon
     const counters = document.querySelectorAll('.number');
-    const speed = 200;
     
-    const animateCounters = () => {
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-count');
-        const count = +counter.innerText;
-        const inc = target / speed;
+    const animateCounter = (counter) => {
+      const target = +counter.getAttribute('data-count');
+      const duration = 2000; // 2 saniye
+      const startTime = performance.now();
+      
+      const updateCounter = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
         
-        if (count < target) {
-          counter.innerText = Math.ceil(count + inc);
-          setTimeout(animateCounters, 1);
+        // Easing fonksiyonu (yavaşlayarak bitir)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+        
+        counter.innerText = current.toLocaleString('tr-TR');
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
         } else {
           counter.innerText = target.toLocaleString('tr-TR');
         }
-      });
+      };
+      
+      requestAnimationFrame(updateCounter);
     };
     
     // Sayfa yüklendiğinde sayaçları başlat
-    setTimeout(animateCounters, 500);
+    setTimeout(() => {
+      counters.forEach(counter => animateCounter(counter));
+    }, 500);
 
     // Pasta Grafik - Hizmet Dağılımı
     new Chart(document.getElementById('pieChart'), {
