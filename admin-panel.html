@@ -293,6 +293,50 @@
     </div>
   </div>
 
+  <!-- Message Detail Modal -->
+  <div class="modal-overlay" id="messageModal">
+    <div class="modal-content" style="max-width:550px;">
+      <div class="modal-header" style="background:linear-gradient(135deg,#0d6efd,#6610f2);color:white;">
+        <h3><i class="bi bi-envelope-open"></i> Mesaj Detayı</h3>
+        <button class="modal-close" onclick="closeMessageModal()" style="color:white;"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:15px;"><strong>Gönderen:</strong><p id="msgDetailName" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>E-posta:</strong><p id="msgDetailEmail" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Konu:</strong><p id="msgDetailSubject" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Tarih:</strong><p id="msgDetailDate" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Mesaj:</strong><p id="msgDetailMessage" style="margin:5px 0;padding:15px;background:#f8f9fa;border-radius:8px;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Durum:</strong><span id="msgDetailStatus" style="margin-left:10px;"></span></div>
+      </div>
+      <div class="modal-footer" style="justify-content:flex-end;gap:10px;">
+        <button class="btn-cancel" onclick="markMessageAsRead()" style="background:#6c757d;color:white;border:none;"><i class="bi bi-check2"></i> Okundu İşaretle</button>
+        <button class="btn-save" onclick="openReplyModal()" style="background:#0d6efd;"><i class="bi bi-reply"></i> Cevapla</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reply Modal -->
+  <div class="modal-overlay" id="replyModal">
+    <div class="modal-content" style="max-width:500px;">
+      <div class="modal-header" style="background:linear-gradient(135deg,#0d6efd,#6610f2);color:white;">
+        <h3><i class="bi bi-reply"></i> Mesajı Yanıtla</h3>
+        <button class="modal-close" onclick="closeReplyModal()" style="color:white;"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:15px;"><strong>Alıcı:</strong><p id="replyTo" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;"><strong>Konu:</strong><p id="replySubject" style="margin:5px 0;"></p></div>
+        <div style="margin-bottom:15px;">
+          <strong>Yanıtınız:</strong>
+          <textarea id="replyMessage" rows="6" style="width:100%;margin-top:10px;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1rem;resize:vertical;" placeholder="Yanıtınızı buraya yazın..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content:flex-end;gap:10px;">
+        <button class="btn-cancel" onclick="closeReplyModal()">İptal</button>
+        <button class="btn-save" onclick="sendReply()" style="background:#0d6efd;"><i class="bi bi-send"></i> Gönder</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="toast-container" id="toastContainer"></div>
 
@@ -590,14 +634,81 @@ function loadSubscribers() {
   document.getElementById('subscribersTable').innerHTML = html;
 }
 
+var currentMessageId = null;
+
 function viewMessage(id) {
   var m = null;
   for (var i = 0; i < dataStore.messages.length; i++) {
     if (dataStore.messages[i].id === id) { m = dataStore.messages[i]; break; }
   }
   if (m) {
-    alert('Gönderen: ' + m.name + '\nE-posta: ' + m.email + '\nKonu: ' + m.subject + '\n\nMesaj:\n' + m.message);
+    currentMessageId = id;
+    var statusLabels = { unread: 'Okunmadı', read: 'Okundu', replied: 'Yanıtlandı' };
+    var statusColors = { unread: 'warning', read: 'secondary', replied: 'success' };
+    document.getElementById('msgDetailName').textContent = m.name;
+    document.getElementById('msgDetailEmail').textContent = m.email;
+    document.getElementById('msgDetailSubject').textContent = m.subject;
+    document.getElementById('msgDetailDate').textContent = m.date;
+    document.getElementById('msgDetailMessage').textContent = m.message;
+    document.getElementById('msgDetailStatus').innerHTML = '<span class="status-badge status-' + statusColors[m.status] + '">' + statusLabels[m.status] + '</span>';
+    document.getElementById('messageModal').classList.add('show');
   }
+}
+
+function closeMessageModal() {
+  document.getElementById('messageModal').classList.remove('show');
+}
+
+function markMessageAsRead() {
+  if (currentMessageId === null) return;
+  for (var i = 0; i < dataStore.messages.length; i++) {
+    if (dataStore.messages[i].id === currentMessageId) {
+      dataStore.messages[i].status = 'read';
+      break;
+    }
+  }
+  closeMessageModal();
+  loadMessages();
+  showToast('Durum Güncellendi', 'Mesaj okundu olarak işaretlendi.', 'info');
+}
+
+function openReplyModal() {
+  var m = null;
+  for (var i = 0; i < dataStore.messages.length; i++) {
+    if (dataStore.messages[i].id === currentMessageId) { m = dataStore.messages[i]; break; }
+  }
+  if (m) {
+    document.getElementById('replyTo').textContent = m.name + ' <' + m.email + '>';
+    document.getElementById('replySubject').textContent = 'RE: ' + m.subject;
+    document.getElementById('replyMessage').value = '';
+    document.getElementById('replyModal').classList.add('show');
+  }
+}
+
+function closeReplyModal() {
+  document.getElementById('replyModal').classList.remove('show');
+}
+
+function sendReply() {
+  var replyText = document.getElementById('replyMessage').value.trim();
+  if (!replyText) {
+    showToast('Hata', 'Lütfen bir yanıt yazın.', 'error');
+    return;
+  }
+  
+  // Mesaj durumunu güncelle
+  for (var i = 0; i < dataStore.messages.length; i++) {
+    if (dataStore.messages[i].id === currentMessageId) {
+      dataStore.messages[i].status = 'replied';
+      break;
+    }
+  }
+  
+  closeReplyModal();
+  closeMessageModal();
+  loadMessages();
+  showToast('Yanıt Gönderildi', 'Mesajınız başarıyla gönderildi.', 'success');
+  currentMessageId = null;
 }
 
 function initCharts() {
