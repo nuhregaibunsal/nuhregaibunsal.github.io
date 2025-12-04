@@ -448,7 +448,8 @@ function showToast(title, message, type) {
 
 // Çıkış
 function logout() {
-  sessionStorage.removeItem('adminLoggedIn');
+  sessionStorage.removeItem('isLoggedIn');
+  sessionStorage.removeItem('adminUser');
   window.location.href = 'admin-login.html';
 }
 
@@ -857,7 +858,7 @@ function loadTestimonials() {
 // Sayfa yüklendiğinde
 document.addEventListener('DOMContentLoaded', function() {
   // Oturum kontrolü
-  if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+  if (sessionStorage.getItem('isLoggedIn') !== 'true') {
     window.location.href = 'admin-login.html';
     return;
   }

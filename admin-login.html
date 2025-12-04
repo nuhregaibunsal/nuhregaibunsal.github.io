@@ -304,7 +304,7 @@
       setTimeout(() => {
         if (username === 'Admin' && password === 'admin123') {
           // Başarılı giriş - session storage'a kaydet
-          sessionStorage.setItem('adminLoggedIn', 'true');
+          sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('adminUser', username);
           window.location.href = 'admin-panel.html';
         } else {

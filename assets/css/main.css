@@ -21,26 +21,28 @@
 :root { 
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #222222; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #106eea; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --heading-color: #1B5E20; /* Color for headings - Dark agricultural green */
+  --accent-color: #2E7D32; /* Accent color - Agricultural green for buttons, links */
+  --accent-color-light: #4CAF50; /* Light green for hover states */
+  --accent-color-dark: #1B5E20; /* Dark green for active states */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #222222;  /* The default color of the main navmenu links */
-  --nav-hover-color: #106eea; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #2E7D32; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #222222; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #106eea; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #2E7D32; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
-  --background-color: #f5f9ff;
+  --background-color: #F1F8E9; /* Light green tinted background */
   --surface-color: #ffffff;
 }
 
@@ -1965,5 +1967,119 @@ section,
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
-  /* Add your styles here */
+  padding: 60px 0;
+}
+
+/*--------------------------------------------------------------
+# Form Input Focus Effects - Agricultural Green Theme
+--------------------------------------------------------------*/
+.php-email-form input[type=text]:focus,
+.php-email-form input[type=email]:focus,
+.php-email-form textarea:focus,
+.form-control:focus {
+  border-color: #2E7D32 !important;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15) !important;
+  outline: none;
+}
+
+/*--------------------------------------------------------------
+# Enhanced Pricing Cards
+--------------------------------------------------------------*/
+.pricing .pricing-item {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing .pricing-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.pricing .btn-buy {
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.pricing .btn-buy:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(46, 125, 50, 0.3);
+}
+
+.pricing .advanced {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/*--------------------------------------------------------------
+# Hero Button Styles
+--------------------------------------------------------------*/
+.hero .btn-get-started {
+  background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+  border-radius: 30px;
+  padding: 14px 35px;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(46, 125, 50, 0.3);
+}
+
+.hero .btn-get-started:hover {
+  background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(46, 125, 50, 0.4);
+}
+
+.hero .btn-watch-video {
+  border: 2px solid #2E7D32;
+  border-radius: 30px;
+  padding: 12px 25px;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+}
+
+.hero .btn-watch-video:hover {
+  background: rgba(46, 125, 50, 0.1);
+}
+
+.hero .btn-watch-video i {
+  color: #2E7D32;
+}
+
+/*--------------------------------------------------------------
+# Service Cards Hover Effect
+--------------------------------------------------------------*/
+.services .service-item {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.services .service-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/*--------------------------------------------------------------
+# Testimonials Avatar
+--------------------------------------------------------------*/
+.testimonials .testimonial-item .testimonial-img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/*--------------------------------------------------------------
+# Modern Card Styles
+--------------------------------------------------------------*/
+.featured-services .service-item,
+.team .team-member,
+.portfolio .portfolio-item {
+  border-radius: 12px;
+}
+
+.team .team-member {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team .team-member:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
