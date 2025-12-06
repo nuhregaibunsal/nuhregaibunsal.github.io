@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Duyurular - AgriNova</title>
+  <meta name="description" content="AgriNova duyuruları ve haberler">
+  
+  <link href="assets/img/icon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  
+  <style>
+    .page-title {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      padding: 80px 0 60px;
+      color: white;
+      text-align: center;
+    }
+    .page-title h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .page-title p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .announcements-section {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+    
+    .announcement-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .announcement-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    }
+    .announcement-card .card-header {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .announcement-card .card-header .date {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .announcement-card .card-header .date i {
+      margin-right: 8px;
+    }
+    .announcement-card .card-header .badge-new {
+      background: #ffc107;
+      color: #333;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .announcement-card .card-body {
+      padding: 25px;
+    }
+    .announcement-card .card-body h3 {
+      color: #333;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .announcement-card .card-body p {
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .announcement-card .card-body .attachments {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .announcement-card .card-body .attachment {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.3s;
+    }
+    .announcement-card .card-body .attachment:hover {
+      background: #e9ecef;
+    }
+    .announcement-card .card-body .attachment i {
+      margin-right: 8px;
+      color: #28a745;
+    }
+    .announcement-card .card-body .attachment.pdf i { color: #dc3545; }
+    .announcement-card .card-body .attachment.doc i { color: #0d6efd; }
+    .announcement-card .card-body .attachment.img i { color: #6f42c1; }
+    
+    .announcement-card .card-footer {
+      padding: 15px 25px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .announcement-card .card-footer .author {
+      display: flex;
+      align-items: center;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .announcement-card .card-footer .author i {
+      margin-right: 8px;
+      color: #28a745;
+    }
+    .btn-read-more {
+      background: #28a745;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .btn-read-more:hover {
+      background: #218838;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:kurumsaliletisim@kocaeli.edu.tr">kurumsaliletisim@kocaeli.edu.tr</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+90 (262) 303 10 43</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/nuhregaibunsal/nuhregaibunsal.github.io" target="_blank" class="github"><i class="bi bi-github"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/icon.png" alt="">
+          <h1 class="sitename">AgriNova</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html">Anasayfa</a></li>
+            <li><a href="index.html#about">Hakkımızda</a></li>
+            <li><a href="index.html#services">Hizmetler</a></li>
+            <li><a href="index.html#portfolio">Portföy</a></li>
+            <li><a href="index.html#team">Ekibimiz</a></li>
+            <li class="dropdown"><a href="#"><span>Çözümler</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="service-details.html">Akıllı Sulama Sistemleri</a></li>
+                <li class="dropdown"><a href="#"><span>Dikey Tarım</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="service-details.html#led">LED Aydınlatma Sistemleri</a></li>
+                    <li><a href="service-details.html#besin">Besin Dozajlama</a></li>
+                    <li><a href="service-details.html#iklim">İklim Kontrolü</a></li>
+                  </ul>
+                </li>
+                <li><a href="service-details.html#drone">Drone Gözetim Hizmetleri</a></li>
+                <li><a href="service-details.html#veri">Veri Analizi Platformu</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="active"><span>Kurumsal</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="sayilarla.html">Sayılarla AgriNova</a></li>
+                <li><a href="duyurular.html" class="active">Duyurular</a></li>
+                <li><a href="starter-page.html">Kariyer</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#contact">İletişim</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Page Title -->
+    <section class="page-title">
+      <div class="container">
+        <h1 data-aos="fade-up"><i class="bi bi-megaphone-fill"></i> Duyurular</h1>
+        <p data-aos="fade-up" data-aos-delay="100">AgriNova'dan en güncel haberler ve duyurular</p>
+      </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="announcements-section">
+      <div class="container">
+        
+        <!-- Duyuru 1 -->
+        <div class="announcement-card" data-aos="fade-up">
+          <div class="card-header">
+            <div class="date"><i class="bi bi-calendar3"></i> 03 Aralık 2024</div>
+            <span class="badge-new">YENİ</span>
+          </div>
+          <div class="card-body">
+            <h3>Yeni Drone Analiz Hizmeti</h3>
+            <p>Değerli müşterilerimiz, AgriNova olarak tarımsal verimliliğinizi artırmak için gelişmiş NDVI (Normalize Edilmiş Fark Bitki Örtüsü İndeksi) analiz hizmetimizi kullanıma sunduk. Bitki sağlığı durumunu gerçek zamanlı olarak izleyebilir, hastalık ve zararlı tespitini erken aşamada yapabilirsiniz.</p>
+            <div class="attachments">
+              <a href="#" class="attachment pdf"><i class="bi bi-file-pdf"></i> Teknik Doküman.pdf</a>
+              <a href="#" class="attachment img"><i class="bi bi-image"></i> Örnek Analiz.jpg</a>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="author"><i class="bi bi-person-circle"></i> AgriNova Teknik Ekibi</div>
+          </div>
+        </div>
+
+        <!-- Duyuru 2 -->
+        <div class="announcement-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-header">
+            <div class="date"><i class="bi bi-calendar3"></i> 28 Kasım 2024</div>
+            <span class="badge-new">YENİ</span>
+          </div>
+          <div class="card-body">
+            <h3>Kış Kampanyası Başladı</h3>
+            <p>Kış sezonuna özel %20 indirim kampanyamız başlamıştır! Tam Entegrasyon (Premium) paketinde %20 indirim, yıllık ödeme seçeneğinde ek %10 indirim ve ilk 3 ay ücretsiz kurulum ve eğitim desteği sunuyoruz. Kampanya 31 Aralık 2024 tarihine kadar geçerlidir.</p>
+            <div class="attachments">
+              <a href="#" class="attachment pdf"><i class="bi bi-file-pdf"></i> Kampanya Şartları.pdf</a>
+              <a href="#" class="attachment doc"><i class="bi bi-file-word"></i> Başvuru Formu.docx</a>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="author"><i class="bi bi-person-circle"></i> AgriNova Pazarlama</div>
+          </div>
+        </div>
+
+        <!-- Duyuru 3 -->
+        <div class="announcement-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-header">
+            <div class="date"><i class="bi bi-calendar3"></i> 15 Kasım 2024</div>
+          </div>
+          <div class="card-body">
+            <h3>IoT Sensör Güncellemesi</h3>
+            <p>Teknoloji altyapımızda önemli bir güncelleme gerçekleştirdik! Yeni Nesil Toprak Nem Sensörlerimiz artık ±%1 hassasiyet ile sektörün en doğru ölçümlerini sunuyor. Genişletilmiş pil ömrü (24 ay) ve IP68 su geçirmezlik sertifikası ile daha dayanıklı.</p>
+            <div class="attachments">
+              <a href="#" class="attachment pdf"><i class="bi bi-file-pdf"></i> Sensör Özellikleri.pdf</a>
+              <a href="#" class="attachment img"><i class="bi bi-image"></i> Sensör Görselleri.zip</a>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="author"><i class="bi bi-person-circle"></i> AgriNova Ar-Ge</div>
+          </div>
+        </div>
+
+        <!-- Duyuru 4 -->
+        <div class="announcement-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-header">
+            <div class="date"><i class="bi bi-calendar3"></i> 01 Kasım 2024</div>
+          </div>
+          <div class="card-body">
+            <h3>Yeni Ortaklık Anlaşması</h3>
+            <p>AgriNova olarak, Türkiye'nin önde gelen sera üreticileriyle stratejik ortaklık anlaşması imzaladık. Bu ortaklık kapsamında 50+ sera tesisine akıllı tarım çözümleri entegrasyonu, ortak Ar-Ge projeleri ve bölgesel eğitim merkezleri kurulumu planlanmaktadır.</p>
+            <div class="attachments">
+              <a href="#" class="attachment pdf"><i class="bi bi-file-pdf"></i> Basın Bülteni.pdf</a>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="author"><i class="bi bi-person-circle"></i> AgriNova Kurumsal İletişim</div>
+          </div>
+        </div>
+
+        <!-- Duyuru 5 -->
+        <div class="announcement-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-header">
+            <div class="date"><i class="bi bi-calendar3"></i> 20 Ekim 2024</div>
+          </div>
+          <div class="card-body">
+            <h3>Mobil Uygulama Yayında</h3>
+            <p>AgriNova Mobil Uygulaması artık iOS ve Android platformlarında kullanıma sunuldu. Gerçek zamanlı sensör verileri takibi, anlık bildirimler, uzaktan sulama kontrolü ve haftalık raporlar artık cebinizde. App Store ve Google Play'de "AgriNova" aratarak ücretsiz indirebilirsiniz.</p>
+            <div class="attachments">
+              <a href="#" class="attachment pdf"><i class="bi bi-file-pdf"></i> Kullanım Kılavuzu.pdf</a>
+              <a href="#" class="attachment img"><i class="bi bi-image"></i> Uygulama Ekran Görüntüleri.zip</a>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="author"><i class="bi bi-person-circle"></i> AgriNova Yazılım Ekibi</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">AgriNova</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Kocaeli Üniversitesi Teknoloji Fakültesi</p>
+            <p>Umuttepe Yerleşkesi, 41001</p>
+            <p class="mt-3"><strong>Telefon:</strong> <span>+90 (262) 303 10 43</span></p>
+            <p><strong>E-posta:</strong> <span>kurumsaliletisim@kocaeli.edu.tr</span></p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hızlı Linkler</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html">Anasayfa</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#about">Hakkımızda</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#services">Hizmetler</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#contact">İletişim</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hizmetlerimiz</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Akıllı Sulama</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Dikey Tarım</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Drone Analiz</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Veri Platformu</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Bültenimize Abone Olun</h4>
+          <p>Tarım teknolojilerindeki son gelişmelerden haberdar olun.</p>
+          <form action="" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email" placeholder="E-posta adresiniz"><input type="submit" value="Abone Ol"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">AgriNova</strong><span>Her hakkı saklıdır</span></p>
+      <div class="credits">Tasarlayan: <a href="#">Nuh Regaib Ünsal</a></div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

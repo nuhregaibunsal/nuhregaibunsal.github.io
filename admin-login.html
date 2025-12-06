@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Admin Girişi - AgriNova</title>
+  <link href="assets/img/icon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #1e3a2f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: 50px 50px;
+      animation: float 20s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50px); }
+    }
+    .login-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .login-header .logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+    }
+    .login-header .logo i {
+      font-size: 2.5rem;
+      color: white;
+    }
+    .login-header h1 {
+      font-size: 1.8rem;
+      color: #2c3e50;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .login-header p {
+      color: #6c757d;
+      font-size: 0.95rem;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #495057;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .form-group .input-wrapper {
+      position: relative;
+    }
+    .form-group .input-wrapper i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #adb5bd;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 14px 15px 14px 45px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #f8f9fa;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #28a745;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.1);
+    }
+    .form-group input:focus + i,
+    .form-group .input-wrapper:focus-within i {
+      color: #28a745;
+    }
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #adb5bd;
+      cursor: pointer;
+      padding: 0;
+      font-size: 1.1rem;
+    }
+    .password-toggle:hover {
+      color: #28a745;
+    }
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+    }
+    .btn-login:active {
+      transform: translateY(0);
+    }
+    .error-message {
+      background: #fff5f5;
+      border: 1px solid #fc8181;
+      color: #c53030;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+    .error-message.show {
+      display: flex;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 25px;
+    }
+    .back-link a {
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .back-link a:hover {
+      color: #28a745;
+    }
+    .back-link a i {
+      margin-right: 5px;
+    }
+
+    /* Loading animation */
+    .btn-login.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+    .btn-login.loading .spinner {
+      display: block;
+    }
+    .btn-login.loading .btn-text {
+      display: none;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo">
+          <i class="bi bi-shield-lock"></i>
+        </div>
+        <h1>Admin Paneli</h1>
+        <p>AgriNova Yönetim Sistemi</p>
+      </div>
+
+      <div class="error-message" id="errorMessage">
+        <i class="bi bi-exclamation-circle"></i>
+        <span>Kullanıcı adı veya şifre hatalı!</span>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Kullanıcı Adı</label>
+          <div class="input-wrapper">
+            <input type="text" id="username" name="username" placeholder="Kullanıcı adınızı girin" required>
+            <i class="bi bi-person"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <div class="input-wrapper">
+            <input type="password" id="password" name="password" placeholder="Şifrenizi girin" required>
+            <i class="bi bi-lock"></i>
+            <button type="button" class="password-toggle" onclick="togglePassword()">
+              <i class="bi bi-eye" id="toggleIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span class="btn-text">Giriş Yap</span>
+          <div class="spinner"></div>
+        </button>
+      </form>
+
+      <div class="back-link">
+        <a href="index.html"><i class="bi bi-arrow-left"></i> Ana Sayfaya Dön</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Şifre göster/gizle
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('bi-eye');
+        toggleIcon.classList.add('bi-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('bi-eye-slash');
+        toggleIcon.classList.add('bi-eye');
+      }
+    }
+
+    // Giriş formu
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const loginBtn = document.getElementById('loginBtn');
+      const errorMessage = document.getElementById('errorMessage');
+      
+      // Loading durumu
+      loginBtn.classList.add('loading');
+      errorMessage.classList.remove('show');
+      
+      // Simüle edilmiş giriş kontrolü (1 saniye gecikme)
+      setTimeout(() => {
+        if (username === 'Admin' && password === 'admin123') {
+          // Başarılı giriş - session storage'a kaydet
+          sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('adminUser', username);
+          window.location.href = 'admin-panel.html';
+        } else {
+          // Hatalı giriş
+          loginBtn.classList.remove('loading');
+          errorMessage.classList.add('show');
+          
+          // Input'ları salla
+          document.querySelector('.login-card').style.animation = 'shake 0.5s';
+          setTimeout(() => {
+            document.querySelector('.login-card').style.animation = '';
+          }, 500);
+        }
+      }, 1000);
+    });
+
+    // Shake animasyonu
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20%, 60% { transform: translateX(-10px); }
+        40%, 80% { transform: translateX(10px); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+
+</html>

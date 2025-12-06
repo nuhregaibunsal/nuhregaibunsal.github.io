@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Kariyer - AgriNova</title>
+  <meta name="description" content="AgriNova'da kariyer fırsatları - Geleceğin tarımını birlikte inşa edelim">
+  <meta name="keywords" content="kariyer, iş ilanları, tarım teknolojileri, mühendislik">
+
+  <!-- Favicons -->
+  <link href="assets/img/icon.png" rel="icon">
+  <link href="assets/img/icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .job-card {
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      background: white;
+    }
+    .job-card:hover {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+      border-color: #28a745;
+    }
+    .job-card .badge {
+      font-size: 0.8rem;
+      padding: 5px 12px;
+    }
+    .job-card h4 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    .job-meta {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    .job-meta i {
+      margin-right: 5px;
+    }
+    .benefit-item {
+      text-align: center;
+      padding: 30px 20px;
+      border-radius: 10px;
+      background: #f8f9fa;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    .benefit-item:hover {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+    }
+    .benefit-item:hover i {
+      color: white;
+    }
+    .benefit-item i {
+      font-size: 2.5rem;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    .culture-section {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 60px 0;
+    }
+  </style>
+</head>
+
+<body class="starter-page-page">
+
+  <header id="header" class="header sticky-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:kurumsaliletisim@kocaeli.edu.tr">kurumsaliletisim@kocaeli.edu.tr</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+90 (262) 303 10 43</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/icon.png" alt="">
+          <h1 class="sitename">AgriNova</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html">Anasayfa</a></li>
+            <li><a href="index.html#about">Hakkımızda</a></li>
+            <li><a href="index.html#services">Hizmetler</a></li>
+            <li><a href="index.html#portfolio">Portföy</a></li>
+            <li><a href="index.html#team">Ekibimiz</a></li>
+            <li class="dropdown"><a href="#"><span>Çözümler</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="service-details.html">Akıllı Sulama Sistemleri</a></li>
+                <li class="dropdown"><a href="#"><span>Dikey Tarım</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="service-details.html#led">LED Aydınlatma Sistemleri</a></li>
+                    <li><a href="service-details.html#besin">Besin Dozajlama</a></li>
+                    <li><a href="service-details.html#iklim">İklim Kontrolü</a></li>
+                  </ul>
+                </li>
+                <li><a href="service-details.html#drone">Drone Gözetim Hizmetleri</a></li>
+                <li><a href="service-details.html#veri">Veri Analizi Platformu</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="active"><span>Kurumsal</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="sayilarla.html">Sayılarla AgriNova</a></li>
+                <li><a href="duyurular.html">Duyurular</a></li>
+                <li><a href="starter-page.html" class="active">Kariyer</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#contact">İletişim</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Kariyer Fırsatları</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Anasayfa</a></li>
+            <li class="current">Kariyer</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Career Intro Section -->
+    <section class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Bize Katılın</h2>
+        <p><span>Geleceğin Tarımını</span> <span class="description-title">Birlikte İnşa Edelim</span></p>
+      </div>
+
+      <div class="container" data-aos="fade-up">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <p class="lead">
+              AgriNova'da, sürdürülebilir tarım teknolojileri geliştiren tutkulu bir ekibin parçası olabilirsiniz. 
+              Yenilikçi projeler, sürekli öğrenme fırsatları ve anlamlı bir misyon sizi bekliyor.
+            </p>
+            <p>
+              Ziraat mühendisliğinden yazılım geliştirmeye, veri biliminden saha operasyonlarına kadar 
+              farklı disiplinlerden yetenekleri bir araya getiriyoruz. Eğer siz de teknolojiyle 
+              tarımın geleceğini şekillendirmek istiyorsanız, doğru yerdesiniz.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <img src="assets/img/Hakkımızdaimg.png" alt="AgriNova Ekibi" class="img-fluid rounded">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section light-background">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Avantajlar</h2>
+          <p><span>AgriNova'da</span> <span class="description-title">Çalışmanın Ayrıcalıkları</span></p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-md-4 col-sm-6">
+            <div class="benefit-item">
+              <i class="bi bi-mortarboard"></i>
+              <h5>Sürekli Eğitim</h5>
+              <p>Konferans, sertifika ve eğitim programları desteği</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="benefit-item">
+              <i class="bi bi-house-heart"></i>
+              <h5>Esnek Çalışma</h5>
+              <p>Hibrit çalışma modeli ve esnek mesai saatleri</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="benefit-item">
+              <i class="bi bi-heart-pulse"></i>
+              <h5>Sağlık Sigortası</h5>
+              <p>Kapsamlı özel sağlık sigortası paketi</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="benefit-item">
+              <i class="bi bi-graph-up-arrow"></i>
+              <h5>Kariyer Gelişimi</h5>
+              <p>Net kariyer yolları ve mentorluk programları</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="benefit-item">
+              <i class="bi bi-people"></i>
+              <h5>Takım Etkinlikleri</h5>
+              <p>Düzenli sosyal etkinlikler ve takım aktiviteleri</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="benefit-item">
+              <i class="bi bi-tree"></i>
+              <h5>Anlamlı İş</h5>
+              <p>Sürdürülebilirlik odaklı, dünyayı değiştiren projeler</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open Positions Section -->
+    <section id="positions" class="section">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Açık Pozisyonlar</h2>
+          <p><span>Kariyer</span> <span class="description-title">Fırsatları</span></p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          
+          <!-- Job 1 -->
+          <div class="col-lg-6">
+            <div class="job-card">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h4>Ziraat Yüksek Mühendisi</h4>
+                <span class="badge bg-success">Tam Zamanlı</span>
+              </div>
+              <div class="job-meta">
+                <span><i class="bi bi-geo-alt"></i> Kocaeli</span>
+                <span class="ms-3"><i class="bi bi-briefcase"></i> 3-5 Yıl Deneyim</span>
+              </div>
+              <p>Dikey tarım sistemlerinde bitki yetiştirme protokollerinin geliştirilmesi ve optimizasyonu.</p>
+              <ul class="small text-muted">
+                <li>Ziraat Mühendisliği lisans/yüksek lisans derecesi</li>
+                <li>Hidroponik/aeroponik sistemler deneyimi</li>
+                <li>Veri analizi ve raporlama becerileri</li>
+              </ul>
+              <button onclick="openApplicationModal('Ziraat Mühendisi')" class="btn btn-outline-success btn-sm">Başvur</button>
+            </div>
+          </div>
+
+          <!-- Job 2 -->
+          <div class="col-lg-6">
+            <div class="job-card">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h4>Tarım Veri Bilimcisi</h4>
+                <span class="badge bg-success">Tam Zamanlı</span>
+              </div>
+              <div class="job-meta">
+                <span><i class="bi bi-geo-alt"></i> Kocaeli / Uzaktan</span>
+                <span class="ms-3"><i class="bi bi-briefcase"></i> 2-4 Yıl Deneyim</span>
+              </div>
+              <p>Tarımsal verilerin analizi, makine öğrenimi modelleri geliştirme ve verim tahmin sistemleri.</p>
+              <ul class="small text-muted">
+                <li>İstatistik, Bilgisayar Bilimi veya ilgili alan</li>
+                <li>Python, R ve SQL deneyimi</li>
+                <li>Makine öğrenimi ve veri görselleştirme</li>
+              </ul>
+              <button onclick="openApplicationModal('Veri Analisti')" class="btn btn-outline-success btn-sm">Başvur</button>
+            </div>
+          </div>
+
+          <!-- Job 3 -->
+          <div class="col-lg-6">
+            <div class="job-card">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h4>IoT Donanım Geliştiricisi</h4>
+                <span class="badge bg-success">Tam Zamanlı</span>
+              </div>
+              <div class="job-meta">
+                <span><i class="bi bi-geo-alt"></i> Kocaeli</span>
+                <span class="ms-3"><i class="bi bi-briefcase"></i> 2-5 Yıl Deneyim</span>
+              </div>
+              <p>Tarımsal IoT sensörleri ve otomasyon sistemleri için donanım tasarımı ve geliştirme.</p>
+              <ul class="small text-muted">
+                <li>Elektrik-Elektronik Mühendisliği</li>
+                <li>Gömülü sistemler ve mikrodenetleyici deneyimi</li>
+                <li>PCB tasarımı ve prototipleme</li>
+              </ul>
+              <button onclick="openApplicationModal('IoT Uzmanı')" class="btn btn-outline-success btn-sm">Başvur</button>
+            </div>
+          </div>
+
+          <!-- Job 4 -->
+          <div class="col-lg-6">
+            <div class="job-card">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h4>Saha Uygulama Mühendisi</h4>
+                <span class="badge bg-info">Seyahatli</span>
+              </div>
+              <div class="job-meta">
+                <span><i class="bi bi-geo-alt"></i> Türkiye Geneli</span>
+                <span class="ms-3"><i class="bi bi-briefcase"></i> 1-3 Yıl Deneyim</span>
+              </div>
+              <p>Müşteri sahalarında sistem kurulumu, eğitim ve teknik destek hizmetleri.</p>
+              <ul class="small text-muted">
+                <li>Mühendislik veya Tarım alanında lisans</li>
+                <li>Seyahat engeli olmayan</li>
+                <li>Güçlü iletişim ve problem çözme becerileri</li>
+              </ul>
+              <button onclick="openApplicationModal('Satış Temsilcisi')" class="btn btn-outline-success btn-sm">Başvur</button>
+            </div>
+          </div>
+
+          <!-- Job 5 -->
+          <div class="col-lg-6">
+            <div class="job-card">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h4>Drone Pilotu / Uzaktan Algılama Uzmanı</h4>
+                <span class="badge bg-warning text-dark">Part-Time</span>
+              </div>
+              <div class="job-meta">
+                <span><i class="bi bi-geo-alt"></i> Türkiye Geneli</span>
+                <span class="ms-3"><i class="bi bi-briefcase"></i> 1+ Yıl Deneyim</span>
+              </div>
+              <p>Tarımsal drone uçuşları, multispektral görüntüleme ve veri işleme.</p>
+              <ul class="small text-muted">
+                <li>SHGM onaylı drone pilotu lisansı</li>
+                <li>GIS ve uzaktan algılama bilgisi</li>
+                <li>Tarım veya Çevre Mühendisliği tercih sebebi</li>
+              </ul>
+              <a href="index.html#contact" class="btn btn-outline-success btn-sm">Başvur</a>
+            </div>
+          </div>
+
+          <!-- Job 6 -->
+          <div class="col-lg-6">
+            <div class="job-card">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h4>Stajyer - Yazılım Geliştirme</h4>
+                <span class="badge bg-secondary">Staj</span>
+              </div>
+              <div class="job-meta">
+                <span><i class="bi bi-geo-alt"></i> Kocaeli</span>
+                <span class="ms-3"><i class="bi bi-briefcase"></i> Öğrenci</span>
+              </div>
+              <p>Web ve mobil uygulama geliştirme projelerinde deneyim kazanma fırsatı.</p>
+              <ul class="small text-muted">
+                <li>Bilgisayar Mühendisliği 3. veya 4. sınıf</li>
+                <li>JavaScript, Python veya benzeri dil bilgisi</li>
+                <li>Öğrenmeye açık ve takım çalışmasına yatkın</li>
+              </ul>
+              <a href="index.html#contact" class="btn btn-outline-success btn-sm">Başvur</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section class="culture-section">
+      <div class="container text-center" data-aos="fade-up">
+        <h3>Açık Pozisyon Bulamadınız mı?</h3>
+        <p class="mb-4">Yeteneklerinizin AgriNova'ya katkı sağlayacağını düşünüyorsanız, özgeçmişinizi bize gönderin. Uygun pozisyonlar açıldığında sizinle iletişime geçelim.</p>
+        <a href="mailto:kariyer@agrinova.com.tr" class="btn btn-light btn-lg">
+          <i class="bi bi-envelope me-2"></i> kariyer@agrinova.com.tr
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-6">
+            <h4>Haberler İçin Kayıt Olun</h4>
+            <p>Bültenimize abone olun, ürün ve hizmetlerimizle ilgili en son haberleri hemen alın!</p>
+            <form action="#" method="post" class="php-email-form">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Abone Ol"></div>
+              <div class="loading">Yükleniyor</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Aboneliğiniz başarıyla gerçekleştirildi.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">AgriNova</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Baki Komsuoğlu Bulvarı No:515</p>
+            <p>41001 İzmit/Kocaeli</p>
+            <p class="mt-3"><strong>Telefon:</strong> <span>+90 (262) 303 10 43</span></p>
+            <p><strong>Email:</strong> <span>kurumsaliletisim@kocaeli.edu.tr</span></p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hızlı Erişim</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html">Anasayfa</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#about">Hakkımızda</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#services">Hizmetler</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Kariyer</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Çözümlerimiz</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="service-details.html#sulama">Akıllı Sulama</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="service-details.html#dikey">Dikey Tarım</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="service-details.html#drone">Drone Gözetimi</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="service-details.html#veri">Veri Analizi</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <h4>Sosyal Medya</h4>
+          <p>Sosyal medya hesaplarımızı takip ederek en yeni haberlerden ve kampanyalardan haberdar olun.</p>
+          <div class="social-links d-flex">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/nuhregaibunsal/nuhregaibunsal.github.io" target="_blank"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">AgriNova</strong><span>Her hakkı saklıdır</span></p>
+      <div class="credits">
+        Tasarlayan: <a href="#">Nuh Regaib Ünsal</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- İş Başvuru Modal -->
+  <div id="applicationModal" class="application-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5><i class="bi bi-person-plus"></i> İş Başvurusu</h5>
+        <button class="close-modal" onclick="closeApplicationModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="applicationForm" onsubmit="submitApplication(event)">
+          <div class="form-group">
+            <label>Ad Soyad *</label>
+            <input type="text" id="appName" required>
+          </div>
+          <div class="form-group">
+            <label>E-posta *</label>
+            <input type="email" id="appEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Telefon *</label>
+            <input type="tel" id="appPhone" required>
+          </div>
+          <div class="form-group">
+            <label>Başvurulan Pozisyon *</label>
+            <select id="appPosition" required>
+              <option value="">Seçiniz...</option>
+              <option value="Ziraat Mühendisi">Ziraat Mühendisi</option>
+              <option value="Yazılım Geliştirici">Yazılım Geliştirici</option>
+              <option value="IoT Uzmanı">IoT Uzmanı</option>
+              <option value="Veri Analisti">Veri Analisti</option>
+              <option value="Satış Temsilcisi">Satış Temsilcisi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Deneyim Süresi</label>
+            <select id="appExperience">
+              <option value="0-1">0-1 Yıl</option>
+              <option value="1-3">1-3 Yıl</option>
+              <option value="3-5">3-5 Yıl</option>
+              <option value="5+">5+ Yıl</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ön Yazı</label>
+            <textarea id="appCoverLetter" rows="4" placeholder="Kendinizi kısaca tanıtın..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit"><i class="bi bi-send"></i> Başvuruyu Gönder</button>
+        </form>
+        <div id="applicationSuccess" class="success-message" style="display:none;">
+          <i class="bi bi-check-circle-fill"></i>
+          <h4>Başvurunuz Alındı!</h4>
+          <p>En kısa sürede sizinle iletişime geçeceğiz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .application-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+    .application-modal.show { display: flex; }
+    .application-modal .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .application-modal .modal-header {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .application-modal .modal-header h5 { margin: 0; font-size: 1.2rem; }
+    .application-modal .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    .application-modal .modal-body { padding: 25px; max-height: 70vh; overflow-y: auto; }
+    .application-modal .form-group { margin-bottom: 15px; }
+    .application-modal .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #333; }
+    .application-modal .form-group input,
+    .application-modal .form-group select,
+    .application-modal .form-group textarea {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .application-modal .form-group input:focus,
+    .application-modal .form-group select:focus,
+    .application-modal .form-group textarea:focus {
+      border-color: #28a745;
+      outline: none;
+    }
+    .application-modal .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .application-modal .btn-submit:hover { transform: scale(1.02); }
+    .application-modal .success-message {
+      text-align: center;
+      padding: 30px;
+    }
+    .application-modal .success-message i {
+      font-size: 4rem;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    .application-modal .success-message h4 { color: #333; margin-bottom: 10px; }
+    .application-modal .success-message p { color: #666; }
+    html { scroll-behavior: smooth; }
+  </style>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    var selectedPosition = '';
+    
+    function openApplicationModal(position) {
+      selectedPosition = position || '';
+      document.getElementById('applicationModal').classList.add('show');
+      document.getElementById('applicationForm').style.display = 'block';
+      document.getElementById('applicationSuccess').style.display = 'none';
+      if (position) {
+        document.getElementById('appPosition').value = position;
+      }
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeApplicationModal() {
+      document.getElementById('applicationModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    
+    function submitApplication(e) {
+      e.preventDefault();
+      document.getElementById('applicationForm').style.display = 'none';
+      document.getElementById('applicationSuccess').style.display = 'block';
+      
+      // 3 saniye sonra modal'ı kapat
+      setTimeout(function() {
+        closeApplicationModal();
+        document.getElementById('applicationForm').reset();
+      }, 3000);
+    }
+    
+    // Modal dışına tıklayınca kapat
+    document.getElementById('applicationModal').addEventListener('click', function(e) {
+      if (e.target === this) closeApplicationModal();
+    });
+  </script>
+
+</body>
+
+</html>

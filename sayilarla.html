@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sayılarla AgriNova - AgriNova</title>
+  <meta name="description" content="AgriNova istatistikleri ve başarı rakamları">
+  
+  <link href="assets/img/icon.png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    .stats-hero {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      padding: 80px 0 60px;
+      color: white;
+      text-align: center;
+    }
+    .stats-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .stats-hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .stats-cards {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+      height: 100%;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    .stat-card i {
+      font-size: 3rem;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    .stat-card .number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .stat-card .label {
+      color: #6c757d;
+      font-size: 1rem;
+    }
+    
+    .charts-section {
+      padding: 60px 0;
+    }
+    .chart-container {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    .chart-container h4 {
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 300px;
+    }
+    
+    .growth-section {
+      padding: 60px 0;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    .growth-item {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    }
+    .growth-item i {
+      font-size: 2rem;
+      color: #28a745;
+      margin-right: 20px;
+    }
+    .growth-item .info h5 {
+      margin: 0;
+      color: #333;
+    }
+    .growth-item .info p {
+      margin: 5px 0 0;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+    .growth-item .percentage {
+      margin-left: auto;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #28a745;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:kurumsaliletisim@kocaeli.edu.tr">kurumsaliletisim@kocaeli.edu.tr</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+90 (262) 303 10 43</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/icon.png" alt="">
+          <h1 class="sitename">AgriNova</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html">Anasayfa</a></li>
+            <li><a href="index.html#about">Hakkımızda</a></li>
+            <li><a href="index.html#services">Hizmetler</a></li>
+            <li><a href="index.html#portfolio">Portföy</a></li>
+            <li><a href="index.html#team">Ekibimiz</a></li>
+            <li class="dropdown"><a href="#"><span>Çözümler</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="service-details.html">Akıllı Sulama Sistemleri</a></li>
+                <li class="dropdown"><a href="#"><span>Dikey Tarım</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="service-details.html#led">LED Aydınlatma Sistemleri</a></li>
+                    <li><a href="service-details.html#besin">Besin Dozajlama</a></li>
+                    <li><a href="service-details.html#iklim">İklim Kontrolü</a></li>
+                  </ul>
+                </li>
+                <li><a href="service-details.html#drone">Drone Gözetim Hizmetleri</a></li>
+                <li><a href="service-details.html#veri">Veri Analizi Platformu</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="active"><span>Kurumsal</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="sayilarla.html" class="active">Sayılarla AgriNova</a></li>
+                <li><a href="duyurular.html">Duyurular</a></li>
+                <li><a href="starter-page.html">Kariyer</a></li>
+              </ul>
+            </li>
+            <li><a href="index.html#contact">İletişim</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero Section -->
+    <section class="stats-hero">
+      <div class="container">
+        <h1 data-aos="fade-up"><i class="bi bi-graph-up-arrow"></i> Sayılarla AgriNova</h1>
+        <p data-aos="fade-up" data-aos-delay="100">Rakamlarla başarı hikayemiz ve büyüme grafiklerimiz</p>
+      </div>
+    </section>
+
+    <!-- Stats Cards -->
+    <section class="stats-cards">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6" data-aos="fade-up">
+            <div class="stat-card">
+              <i class="bi bi-people-fill"></i>
+              <div class="number" data-count="1250">0</div>
+              <div class="label">Aktif Müşteri</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="stat-card">
+              <i class="bi bi-geo-alt-fill"></i>
+              <div class="number" data-count="85000">0</div>
+              <div class="label">Hektar Alan</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="stat-card">
+              <i class="bi bi-cpu-fill"></i>
+              <div class="number" data-count="45000">0</div>
+              <div class="label">IoT Sensör</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="stat-card">
+              <i class="bi bi-droplet-fill"></i>
+              <div class="number" data-count="40">0</div>
+              <div class="label">% Su Tasarrufu</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="chart-container">
+              <h4><i class="bi bi-pie-chart-fill"></i> Hizmet Dağılımı</h4>
+              <div class="chart-wrapper">
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="chart-container">
+              <h4><i class="bi bi-bar-chart-fill"></i> Yıllık Müşteri Artışı</h4>
+              <div class="chart-wrapper">
+                <canvas id="barChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="chart-container">
+              <h4><i class="bi bi-graph-up"></i> Aylık Verimlilik Artışı (%)</h4>
+              <div class="chart-wrapper">
+                <canvas id="lineChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="chart-container">
+              <h4><i class="bi bi-bullseye"></i> Bölgesel Dağılım</h4>
+              <div class="chart-wrapper">
+                <canvas id="doughnutChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Growth Section -->
+    <section class="growth-section">
+      <div class="container">
+        <h3 class="text-center mb-5" data-aos="fade-up"><i class="bi bi-rocket-takeoff"></i> Büyüme Metrikleri</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="growth-item" data-aos="fade-right">
+              <i class="bi bi-graph-up-arrow"></i>
+              <div class="info">
+                <h5>Yıllık Gelir Artışı</h5>
+                <p>2023-2024 karşılaştırması</p>
+              </div>
+              <div class="percentage">+67%</div>
+            </div>
+            <div class="growth-item" data-aos="fade-right" data-aos-delay="100">
+              <i class="bi bi-people"></i>
+              <div class="info">
+                <h5>Müşteri Memnuniyeti</h5>
+                <p>Anket sonuçları ortalaması</p>
+              </div>
+              <div class="percentage">94%</div>
+            </div>
+            <div class="growth-item" data-aos="fade-right" data-aos-delay="200">
+              <i class="bi bi-recycle"></i>
+              <div class="info">
+                <h5>Karbon Ayak İzi Azaltımı</h5>
+                <p>Müşterilerimizin toplam tasarrufu</p>
+              </div>
+              <div class="percentage">-35%</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="growth-item" data-aos="fade-left">
+              <i class="bi bi-building"></i>
+              <div class="info">
+                <h5>Yeni Sera Entegrasyonu</h5>
+                <p>Bu yıl eklenen tesisler</p>
+              </div>
+              <div class="percentage">+120</div>
+            </div>
+            <div class="growth-item" data-aos="fade-left" data-aos-delay="100">
+              <i class="bi bi-award"></i>
+              <div class="info">
+                <h5>Sektör Ödülleri</h5>
+                <p>Ulusal ve uluslararası</p>
+              </div>
+              <div class="percentage">8</div>
+            </div>
+            <div class="growth-item" data-aos="fade-left" data-aos-delay="200">
+              <i class="bi bi-person-workspace"></i>
+              <div class="info">
+                <h5>Çalışan Sayısı</h5>
+                <p>Tam zamanlı uzman kadro</p>
+              </div>
+              <div class="percentage">85</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">AgriNova</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Kocaeli Üniversitesi Teknoloji Fakültesi</p>
+            <p>Umuttepe Yerleşkesi, 41001</p>
+            <p class="mt-3"><strong>Telefon:</strong> <span>+90 (262) 303 10 43</span></p>
+            <p><strong>E-posta:</strong> <span>kurumsaliletisim@kocaeli.edu.tr</span></p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hızlı Linkler</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html">Anasayfa</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#about">Hakkımızda</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#services">Hizmetler</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="index.html#contact">İletişim</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hizmetlerimiz</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Akıllı Sulama</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Dikey Tarım</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Drone Analiz</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Veri Platformu</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Bültenimize Abone Olun</h4>
+          <p>Tarım teknolojilerindeki son gelişmelerden haberdar olun.</p>
+          <form action="" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email" placeholder="E-posta adresiniz"><input type="submit" value="Abone Ol"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">AgriNova</strong><span>Her hakkı saklıdır</span></p>
+      <div class="credits">Tasarlayan: <a href="#">Nuh Regaib Ünsal</a></div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    AOS.init();
+
+    // Sayaç animasyonu - düzeltilmiş versiyon
+    const counters = document.querySelectorAll('.number');
+    
+    const animateCounter = (counter) => {
+      const target = +counter.getAttribute('data-count');
+      const duration = 2000; // 2 saniye
+      const startTime = performance.now();
+      
+      const updateCounter = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing fonksiyonu (yavaşlayarak bitir)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+        
+        counter.innerText = current.toLocaleString('tr-TR');
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.innerText = target.toLocaleString('tr-TR');
+        }
+      };
+      
+      requestAnimationFrame(updateCounter);
+    };
+    
+    // Sayfa yüklendiğinde sayaçları başlat
+    setTimeout(() => {
+      counters.forEach(counter => animateCounter(counter));
+    }, 500);
+
+    // Pasta Grafik - Hizmet Dağılımı
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Akıllı Sulama', 'Dikey Tarım', 'Drone Analiz', 'Veri Platformu'],
+        datasets: [{
+          data: [35, 25, 20, 20],
+          backgroundColor: ['#28a745', '#20c997', '#17a2b8', '#6f42c1'],
+          borderWidth: 2,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+
+    // Çubuk Grafik - Yıllık Müşteri Artışı
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Müşteri Sayısı',
+          data: [150, 320, 580, 890, 1250],
+          backgroundColor: '#28a745',
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Çizgi Grafik - Aylık Verimlilik
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+        datasets: [{
+          label: 'Verimlilik Artışı (%)',
+          data: [12, 15, 18, 22, 28, 32, 35, 38, 36, 34, 30, 28],
+          borderColor: '#28a745',
+          backgroundColor: 'rgba(40, 167, 69, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // Halka Grafik - Bölgesel Dağılım
+    new Chart(document.getElementById('doughnutChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Marmara', 'Ege', 'Akdeniz', 'İç Anadolu', 'Diğer'],
+        datasets: [{
+          data: [40, 25, 20, 10, 5],
+          backgroundColor: ['#28a745', '#20c997', '#17a2b8', '#ffc107', '#6c757d'],
+          borderWidth: 2,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

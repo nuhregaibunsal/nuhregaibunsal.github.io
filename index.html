@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>AgriNova</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/icon.png" rel="icon">
+  <link href="iconn.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Announcements Sidebar CSS -->
+  <style>
+    /* Sidebar Styles */
+    .announcements-sidebar {
+      position: fixed;
+      right: -320px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+      transition: right 0.3s ease;
+    }
+    .announcements-sidebar.open {
+      right: 0;
+    }
+    .sidebar-toggle {
+      position: absolute;
+      left: -50px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 60px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      border-radius: 10px 0 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: -3px 0 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .sidebar-toggle:hover {
+      background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+      left: -55px;
+      width: 55px;
+    }
+    .sidebar-toggle i {
+      color: white;
+      font-size: 1.4rem;
+    }
+    .sidebar-toggle .badge {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #dc3545;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .sidebar-content {
+      width: 320px;
+      max-height: 500px;
+      background: white;
+      border-radius: 10px 0 0 10px;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .sidebar-header {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-header h5 {
+      margin: 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar-header .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .sidebar-body {
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .announcement-item {
+      padding: 15px;
+      border-radius: 8px;
+      background: #f8f9fa;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 3px solid #28a745;
+    }
+    .announcement-item:hover {
+      background: #e9ecef;
+      transform: translateX(-5px);
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    }
+    .announcement-item:last-child {
+      margin-bottom: 0;
+    }
+    .announcement-date {
+      font-size: 0.75rem;
+      color: #6c757d;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .announcement-item h6 {
+      margin: 0 0 8px 0;
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .announcement-item p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    .announcement-item .read-more {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #28a745;
+      font-weight: 500;
+    }
+
+    /* Modal Styles */
+    .announcement-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+    .announcement-modal.show {
+      display: flex;
+    }
+    .announcement-modal .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: modalSlideIn 0.3s ease;
+    }
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .announcement-modal .modal-header {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 20px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .announcement-modal .modal-header h5 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+    .announcement-modal .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .announcement-modal .close-modal:hover {
+      opacity: 1;
+    }
+    .announcement-modal .modal-body {
+      padding: 25px;
+      overflow-y: auto;
+      max-height: calc(80vh - 80px);
+    }
+    .announcement-modal .modal-date {
+      display: inline-block;
+      background: #e9ecef;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-bottom: 20px;
+    }
+    .announcement-modal .modal-body p {
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    .announcement-modal .modal-body ul {
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+    .announcement-modal .modal-body li {
+      color: #555;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .btn-all-announcements {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .btn-all-announcements:hover {
+      background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+      color: white;
+    }
+    .btn-all-announcements i {
+      margin-right: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      .sidebar-content {
+        width: 280px;
+      }
+      .announcements-sidebar {
+        right: -280px;
+      }
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: BizLand
+  * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
+  * Updated: Dec 05 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <!-- Duyurular Sidebar -->
+  <div id="announcements-sidebar" class="announcements-sidebar">
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+      <i class="bi bi-megaphone-fill"></i>
+      <span class="badge">5</span>
+    </div>
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <h5><i class="bi bi-megaphone-fill"></i> Duyurular</h5>
+        <button class="close-btn" onclick="toggleSidebar()">&times;</button>
+      </div>
+      <div class="sidebar-body">
+        <div class="announcement-item" onclick="openAnnouncementModal(1)">
+          <span class="announcement-date">03 Aralık 2024</span>
+          <h6>Yeni Drone Analiz Hizmeti</h6>
+          <p>Gelişmiş NDVI analizi ile bitki sağlığı takibi artık daha kolay...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <div class="announcement-item" onclick="openAnnouncementModal(2)">
+          <span class="announcement-date">28 Kasım 2024</span>
+          <h6>Kış Kampanyası Başladı</h6>
+          <p>Tam Entegrasyon paketinde %20 indirim fırsatını kaçırmayın...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <div class="announcement-item" onclick="openAnnouncementModal(3)">
+          <span class="announcement-date">15 Kasım 2024</span>
+          <h6>IoT Sensör Güncellemesi</h6>
+          <p>Yeni nesil toprak nem sensörlerimiz artık daha hassas ölçüm yapıyor...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <div class="announcement-item" onclick="openAnnouncementModal(4)">
+          <span class="announcement-date">01 Kasım 2024</span>
+          <h6>Yeni Ortaklık Anlaşması</h6>
+          <p>Türkiye'nin önde gelen sera üreticileriyle stratejik ortaklık...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <div class="announcement-item" onclick="openAnnouncementModal(5)">
+          <span class="announcement-date">20 Ekim 2024</span>
+          <h6>Mobil Uygulama Yayında</h6>
+          <p>AgriNova mobil uygulaması iOS ve Android'de kullanıma sunuldu...</p>
+          <span class="read-more">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+        </div>
+        <a href="duyurular.html" class="btn-all-announcements"><i class="bi bi-list-ul"></i> Tüm Duyuruları Gör</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Duyuru Modal -->
+  <div id="announcementModal" class="announcement-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="modalTitle">Duyuru Başlığı</h5>
+        <button class="close-modal" onclick="closeAnnouncementModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <span class="modal-date" id="modalDate">01 Aralık 2024</span>
+        <div id="modalContent">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="header" class="header sticky-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:kurumsaliletisim@kocaeli.edu.tr">kurumsaliletisim@kocaeli.edu.tr</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+90 (262) 303 10 43</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <img src="assets/img/icon.png" alt="">
+          <h1 class="sitename">AgriNova</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Anasayfa</a></li>
+            <li><a href="#about">Hakkımızda</a></li>
+            <li><a href="#services">Hizmetler</a></li>
+            <li><a href="#portfolio">Portföy</a></li>
+            <li><a href="#team">Ekibimiz</a></li>
+            <li class="dropdown"><a href="#"><span>Çözümler</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="service-details.html">Akıllı Sulama Sistemleri</a></li>
+                <li class="dropdown"><a href="#"><span>Dikey Tarım</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="service-details.html#led">LED Aydınlatma Sistemleri</a></li>
+                    <li><a href="service-details.html#besin">Besin Dozajlama</a></li>
+                    <li><a href="service-details.html#iklim">İklim Kontrolü</a></li>
+                  </ul>
+                </li>
+                <li><a href="service-details.html#drone">Drone Gözetim Hizmetleri</a></li>
+                <li><a href="service-details.html#veri">Veri Analizi Platformu</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>Kurumsal</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="sayilarla.html">Sayılarla AgriNova</a></li>
+                <li><a href="duyurular.html">Duyurular</a></li>
+                <li><a href="starter-page.html">Kariyer</a></li>
+              </ul>
+            </li>
+            <li><a href="#contact">İletişim</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
+
+      <div class="container">
+        <div class="row gy-4 align-items-center">
+          <div class="col-lg-7 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+            <h1>Geleceğin Tarımı Bugün Başlıyor</h1>
+            <p>Sürdürülebilir. Akıllı. Kârlı.</p>
+            <div class="d-flex">
+              <a href="#about" class="btn-get-started">Hakkımızda</a>
+              <a href="assets/img/tanıtımvideosu.mp4" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Tanıtım Videosu</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-droplet-half icon"></i></div>
+              <h4><a href="" class="stretched-link">Akıllı Sulama</a></h4>
+              <p>Sensör tabanlı gerçek zamanlı veri analizi ile bitki ihtiyaçlarına göre en ideal su miktarını otomatik olarak sağlar. Su israfını %40'a kadar azaltın.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-columns icon"></i></div>
+              <h4><a href="" class="stretched-link">Dikey Tarım Sistemleri</a></h4>
+              <p>Şehir içi alanlarda, kapalı ve kontrollü ortamlarda, mevsimden bağımsız, yüksek verimli ürün yetiştirme çözümleri sunar.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-graph-up-arrow icon"></i></div>
+              <h4><a href="" class="stretched-link">Verim Optimizasyonu</a></h4>
+              <p>Makine öğrenimi algoritmaları sayesinde tohumdan hasada kadar tüm süreçleri izler, besin dengesini ve ürün kalitesini sürekli iyileştirir.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="bi bi-recycle icon"></i></div>
+              <h4><a href="" class="stretched-link">Sürdürülebilirlik Odaklı Çözümler</a></h4>
+              <p>Kimyasal kullanımını en aza indiren, enerji verimli ve çevre dostu uygulamalarla karbon ayak izinizi düşürmenize yardımcı olur.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Services Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Hakkımızda</h2>
+        <p><span class="description-title">Hakkımızda</span> <span>Daha Fazlası</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-3">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/img/Hakkımızdaimg.png" alt="" class="img-fluid" >
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="about-content ps-0 ps-lg-3">
+              <h3>Geleceğin Tarımını Bugün İnşa Ediyoruz.</h3>
+              <p class="fst-italic">
+                Tarım dünyasına yapay zeka destekli ve veri tabanlı çözümler sunuyoruz.
+              </p>
+              <ul>
+                <li>
+                  <i class="bi bi-leaf icon"></i>
+                  <div>
+                    <h4>Ekolojik ve Ekonomik Sürdürülebilirlik</h4>
+                    <p>Su tüketimini minimuma indiren, kimyasal kullanımını azaltan ve enerji verimli çözümlerimizle hem doğayı hem de bütçenizi koruyoruz.</p>
+                  </div>
+                </li>
+                <li>
+                  <i class="bi bi-bar-chart-line icon"></i>
+                  <div>
+                    <h4>Veriye Dayalı Hassas Tarım</h4>
+                    <p>IoT sensörleri ve yapay zeka destekli analizlerle, bitkilerinizin her anını takip ederek maksimum verim ve kaliteyi garanti ediyoruz.</p>
+                  </div>
+                </li>
+              </ul>
+              <p>
+                AgriNova olarak misyonumuz, gıda güvenliği ve kalitesini artırmak için geleneksel tarım yöntemlerini yıkıcı
+                teknolojilerle birleştirmektir. Şehirleşmenin getirdiği zorluklara dikey tarım ve akıllı otomasyonla
+                cevap veriyor, gezegenimiz için daha az kaynak tüketerek gelecek nesillerin sağlıklı gıdaya
+                erişimini kolaylaştırıyoruz. Her bir sensörümüz, her bir yazılım kodumuz, daha yeşil ve
+                daha verimli bir dünya yaratma vizyonumuzun bir parçasıdır.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row skills-content skills-animation">
+          <div class="col-lg-12"><h4>Kullanılan Yazılım Dilleri</h4></div>
+          <div class="col-lg-6">
+            <div class="progress">
+              <span class="skill"><span>HTML</span> <i class="val"><span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="3"  class="purecounter"></span>%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>CSS</span> <i class="val"><span data-purecounter-start="0" data-purecounter-end="90" data-purecounter-duration="3" class="purecounter"></span>%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>JavaScript</span> <i class="val"><span data-purecounter-start="0" data-purecounter-end="75" data-purecounter-duration="3" class="purecounter"></span>%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill"><span>PHP</span> <i class="val"><span data-purecounter-start="0" data-purecounter-end="80" data-purecounter-duration="3" class="purecounter"></span>%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>WordPress/CMS</span> <i class="val"><span data-purecounter-start="0" data-purecounter-end="90" data-purecounter-duration="3" class="purecounter"></span>%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>Photoshop</span> <i class="val"><span data-purecounter-start="0" data-purecounter-end="55" data-purecounter-duration="3" class="purecounter"></span>%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Skills Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+          <div class="col-lg-12"><h4>Değerlendirmelerimiz</h4></div>
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-droplet-half"></i>
+            <div class="stats-item">
+              <div class="col-lg-11"></div>
+              <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="2" class="purecounter"></span>
+              <p>Su Tasarrufu Oranı (%)</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-map icon"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="2" class="purecounter"></span>
+              <p>Optimize Edilen Alan (Hektar)</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-cloud-upload icon"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="2" class="purecounter"></span>
+              <p>Veri Analizi (Terabyte)</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-leaf-fill icon"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="2" class="purecounter"></span>
+              <p>Yıllık Karbon İzi Azaltımı (Ton)</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients section light-background">
+      <div class="container">
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 2000,
+              "autoplay": {
+                "delay": 0
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 40
+                },
+                "480": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 60
+                },
+                "640": {
+                  "slidesPerView": 4,
+                  "spaceBetween": 80
+                },
+                "992": {
+                  "slidesPerView": 6,
+                  "spaceBetween": 120
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/ortak1.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak2.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak3.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak4.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak5.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak6.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak7.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+            <div class="swiper-slide"><img src="assets/img/clients/ortak8.png" class="img-fluid" alt="" style="width: 300px; height: 80px;"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Clients Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Hizmetlerimiz</h2>
+        <p><span>Akıllı Tarım </span> <span class="description-title">Çözümlerimiz</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-water icon"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Hassas Akıllı Sulama</h3>
+              </a>
+              <p>Sensör tabanlı gerçek zamanlı veri analizi ile bitkinin tam ihtiyacı kadar su sağlar, su tüketimini minimize eder.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-columns-gap icon"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Kontrollü Dikey Sistemler</h3>
+              </a>
+              <p>Yer tasarrufu sağlayan, kapalı ve optimize edilmiş ortamda mevsimden bağımsız, yüksek verimli üretim imkanı.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Verim ve Kalite Optimizasyonu</h3>
+              </a>
+              <p>Makine öğrenimi algoritmalarıyla topraksız tarım besin dengesi ve büyüme koşullarını sürekli izleyerek ürün kalitesini artırır.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-camera-video-fill icon"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Drone ile Saha İzleme</h3>
+              </a>
+              <p>Geniş alanların hızlı ve detaylı taranması, bitki sağlığı sorunlarının ve besin eksikliklerinin erken tespiti.</p>
+              <a href="#" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-lightbulb icon"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Enerji Verimli LED Aydınlatma</h3>
+              </a>
+              <p>Bitki türüne özel, enerji tüketimini minimize eden ve optimum büyümeyi destekleyen spektral aydınlatma çözümleri.</p>
+              <a href="#" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-cpu icon"></i>
+              </div>
+              <a href="#" class="stretched-link">
+                <h3>Tohumdan Tüketime Takip (IoT)</h3>
+              </a>
+              <p>Tüm üretim sürecini uçtan uca dijital olarak izleme, veri toplama ve raporlama. Şeffaflık ve izlenebilirlik sağlar.</p>
+              <a href="#" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+    <div class="container section-title" data-aos="fade-up">
+        <p><span>Müşteri Yorumları</span></p>
+    </div><!-- End Section Title -->
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section dark-background">
+
+      <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Büyük Ölçekli Çiftlik Yöneticisi</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>AgriNova'nın Akıllı Sulama sistemi sayesinde yıllık su tüketimimiz %35 azaldı ve aynı zamanda ürün verimi %15 arttı. Teknolojileri sadece maliyet düşürmekle kalmıyor, çevreye duyarlı bir üretim yapmamızı sağlıyor.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Sürdürülebilirlik Araştırmacısı</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Dikey tarım çözümlerindeki enerji verimliliği ve kaynak yönetimi açısından AgriNova, sektördeki en ileri çözümleri sunuyor. Bu sistemler, şehir gıda güvenliğini sağlamada kritik öneme sahip.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Yatırım Fonu Yöneticisi</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>AgriNova, tarım sektörüne yatırım yapan firmamız için güvenilir bir ortaktır. Veriye dayalı analizleri ve şeffaf üretim süreçleri, yatırımımızın gelecekteki başarısı için sağlam bir temel oluşturuyor.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Kentsel Tarım Girişimcisi</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Şehrin merkezinde bile taze ve sağlıklı ürünler yetiştirebiliyoruz. AgriNova'nın Dikey Tarım Gridi, alan verimliliğini maksimuma çıkardı ve operasyonel hatalarımızı sıfıra indirdi.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Ziraat Mühendisi</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Drone ile saha izleme ve IoT sensörlerinin entegrasyonu, saha analizini dakikalara indirdi. Artık her bitkiyi bireysel olarak yönetebiliyor, hastalıkları erken aşamada tespit edebiliyoruz.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Projeler</h2>
+        <p><span>Başarılı Projelerimiz</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">Tümü</li>
+            <li data-filter=".filter-app">Dikey Tarım</li>
+            <li data-filter=".filter-product">Akıllı Sulama</li>
+            <li data-filter=".filter-branding">Veri Analizi</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/masonry-portfolio/dikey1.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Mekândan Bağımsız Yüksek Verim</h4>
+                <p>Geleneksel tarıma göre %90 daha az su kullanarak, çok katlı dikey sistemlerle yıl boyu kesintisiz ve temiz mahsul üretimi sağlıyoruz.</p>
+                <a href="assets/img/masonry-portfolio/dikey1.png" title="Mekândan Bağımsız Yüksek Verim" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=1" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/masonry-portfolio/sulama1.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Hassas Damla Sulama Yönetimi</h4>
+                <p>Topraktan aldığımız anlık verilerle, bitkinin ihtiyacı olduğu anda, sadece doğru miktarda su ve besini ulaştırarak kaynak israfını önleriz.</p>
+                <a href="assets/img/masonry-portfolio/sulama1.png" title="Hassas Damla Sulama Yönetimi" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=2" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="assets/img/masonry-portfolio/veri1.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Tarladan Merkeze Anlık Veri Akışı</h4>
+                <p>Sahadaki sensör ve otomasyon ünitelerinden toplanan milyonlarca veriyi güvenli bir şekilde aktararak, tüm süreçleri şeffaflaştırırız.</p>
+                <a href="assets/img/masonry-portfolio/veri1.png" title="Tarladan Merkeze Anlık Veri Akışı" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=3" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/masonry-portfolio/dikey2.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Kontrollü İklim, Üstün Kalite</h4>
+                <p>Bitkileriniz için ideal olan; sıcaklık, nem ve LED spektrumlarını optimize ederek, her zaman en kaliteli ve besin değeri yüksek ürünleri garantiliyoruz.</p>
+                <a href="assets/img/masonry-portfolio/dikey2.png" title="Kontrollü İklim, Üstün Kalite" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=4" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/masonry-portfolio/sulama2.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Toprak Nem ve Besin Sensörleri</h4>
+                <p>Tarlanın farklı bölgelerindeki nem, pH ve sıcaklık seviyelerini sürekli takip eden sensörlerimiz sayesinde sulama kararlarını bilimsel temellere dayandırırız.</p>
+                <a href="assets/img/masonry-portfolio/sulama2.png" title="Toprak Nem ve Besin Sensörleri" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=5" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="assets/img/masonry-portfolio/veri2.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Gelişmiş Tarımsal Kontrol Panelleri</h4>
+                <p>Kritik işleme ve analiz donanımlarımız, zorlu tarım koşullarında bile kesintisiz ve güvenilir veri işleme performansı sunar.</p>
+                <a href="assets/img/masonry-portfolio/veri2.png" title="Gelişmiş Tarımsal Kontrol Panelleri" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=6" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/masonry-portfolio/dikey3.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Sıfır Atık, Tam Otomasyon</h4>
+                <p>Tam otomatik döngüsel sistemlerimizle iş gücü maliyetlerini en aza indirir, atık oluşumunu sıfırlar ve hızlı yatırım geri dönüşü sunarız.</p>
+                <a href="assets/img/masonry-portfolio/dikey3.png" title="Sıfır Atık, Tam Otomasyon" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=7" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/masonry-portfolio/sulama3.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Uzaktan Kontrol ve Optimum Verimlilik</h4>
+                <p>Sulama döngülerinizi mobil veya web arayüzünden yönetin. Sistemlerimiz, hava durumu tahminlerine göre otomatik optimize edilerek su ve enerji tasarrufu sağlar.</p>
+                <a href="assets/img/masonry-portfolio/sulama3.png" title="Uzaktan Kontrol ve Optimum Verimlilik" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=8" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="assets/img/masonry-portfolio/veri3.png" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Hava Gözetimi ile Akıllı Karar Alma</h4>
+                <p>Yüksek çözünürlüklü görüntüleme yapabilen tarım dronları sayesinde, tarlanızdaki her santimetreyi analiz eder ve hastalık/zararlı risklerini erken tespit ederiz.</p>
+                <a href="assets/img/masonry-portfolio/veri3.png" title="Hava Gözetimi ile Akıllı Karar Alma" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html?id=9" title="Detaylı Bilgi" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Ekibimiz</h2>
+        <p><span class="description-title">Teknoloji </span> <span>Mimarları</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Dr. Ahmet Yılmaz</h4>
+                <span>Ziraat Yüksek Mühendisi</span>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Elif Kaya</h4>
+                <span>Tarım Veri Bilimcisi</span>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Mehmet Demir</h4>
+                <span>IoT Donanım Geliştiricisi</span>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Zeynep Arslan</h4>
+                <span>Endüstriyel Otomasyon Uzmanı</span>
+              </div>
+            </div>
+          </div><!-- End Team Member -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Team Section -->
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Fiyatlandırma</h2>
+        <p><span>Akıllı Tarım Çözümleri:</span> <span class="description-title">Modüler Fiyatlandırma</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-3">
+
+          <div class="col-xl-3 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="pricing-item">
+              <h3>Temel Sulama</h3>
+              <h4><sup>$</sup>19<span> / month</span></h4>
+              <ul>
+                <li>Toprak Nem Sensörleri</li>
+                <li>Damla Sulama Kontrolü</li>
+                <li>Mobil/Web Kontrol Paneli</li>
+                <li>Temel Teknik Destek</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Satın Al</a>
+              </div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-xl-3 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="pricing-item">
+              <span class="advanced">Popüler</span>
+              <h3>Dikey Otomasyon</h3>
+              <h4><sup>$</sup>49<span> / month</span></h4>
+              <ul>
+                <li>LED Işık Spektrum Yönetimi</li>
+                <li>Hassas Besin Dozajlama</li>
+                <li>Dikey Sistem Kontrolü</li>
+                <li>7/24 Teknik Destek</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Satın Al</a>
+              </div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-xl-3 col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="pricing-item">
+              <h3>Veri ve Drone Analizi</h3>
+              <h4><sup>$</sup>69<span> / month</span></h4>
+              <ul>
+                <li>Gerçek Zamanlı Veri Toplama</li>
+                <li>Drone Gözetimi (Ayda 2)</li>
+                <li>Yapay Zeka Analiz Raporları</li>
+                <li>7/24 Teknik Destek</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Satın Al</a>
+              </div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-xl-3 col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="pricing-item featured">
+              <span class="advanced">Premium</span>
+              <h3>Tam Entegrasyon</h3>
+              <h4><sup>$</sup>99<span> / month</span></h4>
+              <ul>
+                <li>Tüm Sulama Özellikleri</li>
+                <li>Tüm Dikey Otomasyon Özellikleri</li>
+                <li>Tüm Veri ve Drone Özellikleri</li>
+                <li>Öncelikli 7/24 Destek</li>
+                <li>Özel Hesap Yöneticisi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Satın Al</a>
+              </div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Pricing Section -->
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>S.S.S.</h2>
+        <p><span>Sıkça Sorulan</span> <span class="description-title">Sorular</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="faq-container">
+
+              <div class="faq-item faq-active">
+                <h3>Akıllı Tarım Sisteminiz Su ve Enerji Tüketimini Gerçekten Azaltır mı?</h3>
+                <div class="faq-content">
+                  <p>Evet. Özellikle Dikey Tarım çözümlerimiz, kapalı döngü sistemler sayesinde geleneksel tarıma göre %90'a kadar daha az su kullanır. Enerji tüketimi ise akıllı LED yönetimi ve sensör tabanlı otomasyon ile optimize edilmiştir.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>Sistem Kurulumu Ne Kadar Sürer ve Tarlamda Çalışır Durumda mı Geliyor?</h3>
+                <div class="faq-content">
+                  <p>Kurulum süresi, seçilen paketin kapsamına göre değişir. Temel Sulama paketleri 1-2 hafta, Tam Entegrasyon paketleri ise 4-6 hafta içinde anahtar teslim olarak tarlanızda veya tesisinizde çalışır hale getirilir.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>Dron Analizleri Hangi Tür Verileri Toplar ve Bize Ne Fayda Sağlar?</h3>
+                <div class="faq-content">
+                  <p>Dronlarımız, bitki sağlığı (NDVI), nem stres seviyesi ve toprak haritalaması gibi kritik verileri toplar. Bu analizler sayesinde hastalık risklerini erken tespit eder ve gübre/sulama işlemlerini metrekare hassasiyetinde optimize edebilirsiniz.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>Fiyatlandırma Paketleri Arasında Geçiş Yapmak Mümkün müdür?</h3>
+                <div class="faq-content">
+                  <p>Evet, esnek modüler fiyatlandırma yapımız sayesinde, ihtiyacınız değiştiğinde dilediğiniz zaman bir üst pakete geçiş yapabilir veya yıl sonunda sözleşme yenileme döneminde paketinizi düşürebilirsiniz.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>Sisteminiz Mevcut Sulama Ekipmanlarımızla Entegre Olabilir mi?</h3>
+                <div class="faq-content">
+                  <p>Çözümlerimiz, piyasadaki çoğu modern sulama altyapısı ile uyumlu olacak şekilde tasarlanmıştır. Detaylı entegrasyon için bir ön fizibilite çalışması yaparak mevcut sisteminizi nasıl dönüştüreceğimizi belirliyoruz.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>Sistem Çalışırken Teknik Bir Sorun Yaşarsak Kiminle İletişime Geçmeliyiz?</h3>
+                <div class="faq-content">
+                  <p>Tüm müşterilerimiz mobil uygulama üzerinden 7/24 teknik destek talebi oluşturabilir. Premium paket müşterilerimiz için ise özel hesap yöneticisi ve öncelikli telefon destek hattı mevcuttur.</p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div><!-- End Faq item-->
+
+            </div>
+
+          </div><!-- End Faq Column-->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Faq Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>İletişim</h2>
+        <p><span>Yardıma mı İhtiyacınız Var?</span> <span class="description-title">Bize Ulaşın</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+
+            <div class="info-wrap">
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h3>Adres</h3>
+                  <p>Kabaoğlu, Baki Komsuoğlu Bulvarı No:515, Umuttepe, 41001 İzmit/Kocaeli, Türkiye</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-telephone flex-shrink-0"></i>
+                <div>
+                  <h3>Numara</h3>
+                  <p>+90 (262) 303 10 43</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h3>Mail</h3>
+                  <p>kurumsaliletisim@kocaeli.edu.tr</p>
+                </div>
+              </div><!-- End Info Item -->
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2636083291886!2d29.91907677566737!3d40.822173171377266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cb5badf629fe45%3A0xc81fa849234e8755!2sKocaeli%20%C3%9Cniversitesi!5e0!3m2!1str!2sus!4v1764274302513!5m2!1str!2sus" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <form action="#" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <label for="name-field" class="pb-2">İsim</label>
+                  <input type="text" name="name" id="name-field" class="form-control" required="">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email-field" class="pb-2">Email</label>
+                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="subject-field" class="pb-2">Başlık</label>
+                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="message-field" class="pb-2">Mesaj</label>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Yükleniyor</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Mesajınız Başarıyla Gönderilmiştir. İlginiz İçin Teşekkürler.</div>
+
+                  <button type="submit">Mesajı Gönder</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-6">
+            <h4>Haberler İçin Kayıt Olun</h4>
+            <p>Bültenimize abone olun, ürün ve hizmetlerimizle ilgili en son haberleri hemen alın!</p>
+            <form action="#" method="post" class="php-email-form">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+              <div class="loading">Yükleniyor</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Aboneliğiniz başarı ile gerçekleştirmiştir.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="d-flex align-items-center">
+            <span class="sitename">AgriNova</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Baki Komsuoğlu Bulvarı No:515</p>
+            <p>41001 İzmit/Kocaeli</p>
+            <p class="mt-3"><strong>Telefon:</strong> <span>+90 (262) 303 10 43</span></p>
+            <p><strong>Email:</strong> <span>kurumsaliletisim@kocaeli.edu.tr</span></p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Sayfada Dolaş</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Anasayfa</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#about">Hakkımızda</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">Hizmetler</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Hizmet Şartları</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hizmetlerimiz</h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Akıllı Sulama Sistemleri</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Dikey Tarım Otomasyonu</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Veri ve Drone Analizi</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Tam Entegrasyon</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <h4>Sosyal Medya</h4>
+          <p>Aşağıdaki linklerden sosyal medya hesaplarımızı takip ederek en yeni haberlerden ve kampanyalardan hızlıca haberdar olabilirsiniz.</p>
+          <div class="social-links d-flex">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/nuhregaibunsal/nuhregaibunsal.github.io" target="_blank"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">AgriNova</strong><span>Her hakkı saklıdır</span></p>
+      <div class="credits">
+        Tasarlayan: <a href="#">Nuh Regaib Ünsal</a> | <a href="admin-login.html" style="color: #6c757d; opacity: 0.6;"><i class="bi bi-shield-lock"></i> Yönetim</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+  <style>
+    /* Smooth Scroll */
+    html { scroll-behavior: smooth; }
+    /* Back to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 20px rgba(40,167,69,0.4);
+      z-index: 9999;
+    }
+    .scroll-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(40,167,69,0.5);
+      color: white;
+    }
+  </style>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Announcements Sidebar JS -->
+  <script>
+    // Duyuru verileri
+    const announcements = {
+      1: {
+        title: "Yeni Drone Analiz Hizmeti",
+        date: "03 Aralık 2024",
+        content: `
+          <p>Değerli müşterilerimiz,</p>
+          <p>AgriNova olarak, tarımsal verimliliğinizi artırmak için <strong>gelişmiş NDVI (Normalize Edilmiş Fark Bitki Örtüsü İndeksi) analiz hizmetimizi</strong> kullanıma sunduk.</p>
+          <p>Yeni drone analiz hizmetimiz ile:</p>
+          <ul>
+            <li>Bitki sağlığı durumunu gerçek zamanlı olarak izleyebilirsiniz</li>
+            <li>Hastalık ve zararlı tespitini erken aşamada yapabilirsiniz</li>
+            <li>Sulama ve gübreleme ihtiyaçlarını metrekare hassasiyetinde belirleyebilirsiniz</li>
+            <li>Hasat zamanlamasını optimize edebilirsiniz</li>
+          </ul>
+          <p>Bu hizmet, <strong>Veri ve Drone Analizi</strong> ile <strong>Tam Entegrasyon</strong> paketlerimize dahildir. Mevcut müşterilerimiz için ücretsiz güncelleme sunulmaktadır.</p>
+          <p>Detaylı bilgi için teknik ekibimizle iletişime geçebilirsiniz.</p>
+        `
+      },
+      2: {
+        title: "Kış Kampanyası Başladı",
+        date: "28 Kasım 2024",
+        content: `
+          <p>Değerli çiftçilerimiz ve yatırımcılarımız,</p>
+          <p>Kış sezonuna özel <strong>%20 indirim kampanyamız</strong> başlamıştır!</p>
+          <p><strong>Kampanya Detayları:</strong></p>
+          <ul>
+            <li><strong>Tam Entegrasyon (Premium)</strong> paketinde %20 indirim</li>
+            <li>Yıllık ödeme seçeneğinde ek %10 indirim</li>
+            <li>İlk 3 ay ücretsiz kurulum ve eğitim desteği</li>
+            <li>Ücretsiz saha analizi ve fizibilite raporu</li>
+          </ul>
+          <p><strong>Kampanya Süresi:</strong> 28 Kasım - 31 Aralık 2024</p>
+          <p>Bu fırsatı kaçırmamak için hemen bizimle iletişime geçin. Uzman ekibimiz, işletmenize en uygun çözümü belirlemek için yanınızda.</p>
+          <p><em>Not: Kampanya, stoklar ve kurulum kapasitesi ile sınırlıdır.</em></p>
+        `
+      },
+      3: {
+        title: "IoT Sensör Güncellemesi",
+        date: "15 Kasım 2024",
+        content: `
+          <p>Teknoloji altyapımızda önemli bir güncelleme gerçekleştirdik!</p>
+          <p><strong>Yeni Nesil Toprak Nem Sensörlerimiz</strong> artık daha hassas ve güvenilir ölçümler sunuyor.</p>
+          <p><strong>Yeni Özellikler:</strong></p>
+          <ul>
+            <li><strong>±%1 hassasiyet</strong> ile sektörün en doğru ölçümleri</li>
+            <li>Genişletilmiş pil ömrü (24 ay)</li>
+            <li>IP68 su ve toz geçirmezlik sertifikası</li>
+            <li>-40°C ile +85°C arası çalışma sıcaklığı</li>
+            <li>Bluetooth 5.0 ve LoRaWAN bağlantı desteği</li>
+          </ul>
+          <p><strong>Mevcut Müşterilerimiz İçin:</strong></p>
+          <p>Temel Sulama ve Tam Entegrasyon paketlerini kullanan müşterilerimiz, mevcut sensörlerini yeni nesil sensörlerle <strong>%50 indirimli</strong> olarak değiştirebilir.</p>
+          <p>Güncelleme randevusu almak için teknik destek hattımızı arayabilirsiniz.</p>
+        `
+      },
+      4: {
+        title: "Yeni Ortaklık Anlaşması",
+        date: "01 Kasım 2024",
+        content: `
+          <p>Değerli paydaşlarımız,</p>
+          <p>AgriNova olarak, Türkiye'nin önde gelen sera üreticileriyle <strong>stratejik ortaklık anlaşması</strong> imzaladık.</p>
+          <p><strong>Bu ortaklık kapsamında:</strong></p>
+          <ul>
+            <li>50+ sera tesisine akıllı tarım çözümleri entegrasyonu</li>
+            <li>Ortak Ar-Ge projeleri ile yeni ürün geliştirme</li>
+            <li>Bölgesel eğitim merkezleri kurulumu</li>
+            <li>Yerli sensör üretimi için yatırım planlaması</li>
+          </ul>
+          <p>Bu anlaşma, Türk tarımının dijital dönüşümünde önemli bir adım olacaktır.</p>
+        `
+      },
+      5: {
+        title: "Mobil Uygulama Yayında",
+        date: "20 Ekim 2024",
+        content: `
+          <p>Beklenen haber geldi!</p>
+          <p><strong>AgriNova Mobil Uygulaması</strong> artık iOS ve Android platformlarında kullanıma sunuldu.</p>
+          <p><strong>Uygulama Özellikleri:</strong></p>
+          <ul>
+            <li>Gerçek zamanlı sensör verileri takibi</li>
+            <li>Anlık bildirimler ve uyarılar</li>
+            <li>Uzaktan sulama kontrolü</li>
+            <li>Haftalık/aylık raporlar</li>
+            <li>Çoklu tarla yönetimi</li>
+            <li>Hava durumu entegrasyonu</li>
+          </ul>
+          <p><strong>İndirme Linkleri:</strong></p>
+          <p>App Store ve Google Play'de "AgriNova" aratarak uygulamayı ücretsiz indirebilirsiniz.</p>
+        `
+      }
+    };
+
+    // Sidebar aç/kapa
+    function toggleSidebar() {
+      const sidebar = document.getElementById('announcements-sidebar');
+      sidebar.classList.toggle('open');
+    }
+
+    // Modal aç
+    function openAnnouncementModal(id) {
+      const modal = document.getElementById('announcementModal');
+      const announcement = announcements[id];
+      
+      if (announcement) {
+        document.getElementById('modalTitle').textContent = announcement.title;
+        document.getElementById('modalDate').textContent = announcement.date;
+        document.getElementById('modalContent').innerHTML = announcement.content;
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    // Modal kapat
+    function closeAnnouncementModal() {
+      const modal = document.getElementById('announcementModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // Modal dışına tıklayınca kapat
+    document.getElementById('announcementModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeAnnouncementModal();
+      }
+    });
+
+    // ESC tuşu ile modal kapat
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeAnnouncementModal();
+      }
+    });
+
+    
+    // Back to Top Button
+    var scrollTop = document.getElementById('scroll-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        scrollTop.classList.add('active');
+      } else {
+        scrollTop.classList.remove('active');
+      }
+    });
+    scrollTop.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Form Gönderimi - 405 hatasını önle
+    document.querySelectorAll('.php-email-form').forEach(function(form) {
+      // Form action'ı devre dışı bırak
+      form.setAttribute('action', 'javascript:void(0);');
+      form.setAttribute('method', 'post');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var loading = this.querySelector('.loading');
+        var errorMsg = this.querySelector('.error-message');
+        var sentMsg = this.querySelector('.sent-message');
+        
+        // Hata mesajını gizle
+        if (errorMsg) errorMsg.style.display = 'none';
+        if (loading) loading.style.display = 'block';
+        if (sentMsg) sentMsg.style.display = 'none';
+        
+        var currentForm = this;
+        
+        // Simüle edilmiş başarılı gönderim
+        setTimeout(function() {
+          if (loading) loading.style.display = 'none';
+          if (sentMsg) {
+            sentMsg.style.display = 'block';
+          }
+          currentForm.reset();
+          
+          // 5 saniye sonra mesajı gizle
+          setTimeout(function() {
+            if (sentMsg) sentMsg.style.display = 'none';
+          }, 5000);
+        }, 1200);
+        
+        return false;
+      });
+    });
+  </script>
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sent-message {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+      color: white !important;
+      padding: 15px 25px !important;
+      border-radius: 10px !important;
+      animation: fadeInUp 0.5s ease;
+      display: none;
+    }
+    .error-message {
+      display: none !important;
+    }
+  </style>
+
+</body>
+
+</html>
