@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nuh Regaib Ünsal · Backend & full-stack developer</title>
+  <meta name="description" content="Nuh Regaib Ünsal — backend and full-stack developer building event-driven systems with Java, Spring Boot, Kafka, Redis and PostgreSQL." />
+  <meta property="og:title" content="Nuh Regaib Ünsal · Backend & full-stack developer" />
+  <meta property="og:description" content="Event-driven backends, data pipelines and the occasional neon game." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#F4F0E8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316130F'/%3E%3Ccircle cx='9' cy='16' r='3' fill='%23FF7A45'/%3E%3Cpath d='M13 16h11' stroke='%23F4F0E8' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='16' r='2' fill='%233CC4B0'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- one shared icon set: 1.75px outline strokes -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" /></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" /></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" /></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 6 8.5-6" /></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z" /></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" /></symbol>
+  </svg>
+
+  <a class="skip" href="#work">Skip to work</a>
+
+  <header class="nav" id="top">
+    <a class="mark" href="#top" aria-label="Back to top">
+      <span class="mark-dot"></span>nuh<span class="mark-sep">/</span>ünsal
+    </a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-small" href="assets/Nuh-Regaib-Unsal-CV.pdf" download>
+      <svg class="icon"><use href="#i-download" /></svg>CV
+    </a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow reveal"><svg class="icon"><use href="#i-pin" /></svg>Kocaeli, Türkiye</p>
+        <h1 class="reveal">
+          Backends that<br />
+          <em>keep their promises.</em>
+        </h1>
+        <p class="lede reveal">
+          I'm <strong>Nuh Regaib Ünsal</strong>, a 4th-year Information Systems Engineering student who
+          likes the parts of software nobody sees: event streams, caches, schemas and the
+          pipelines that move data between them without losing a single row.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn" href="#work">See selected work<svg class="icon"><use href="#i-arrow" /></svg></a>
+          <a class="link" href="https://github.com/nuhregaibunsal" target="_blank" rel="noopener">
+            <svg class="icon"><use href="#i-github" /></svg>github.com/nuhregaibunsal
+          </a>
+        </div>
+      </div>
+
+      <figure class="stream reveal" aria-label="Animated diagram: producers publish events to a topic with three partitions, consumers read them">
+        <canvas id="stream"></canvas>
+        <figcaption>
+          <span class="live"></span>three producers → one topic, three partitions → two consumer groups
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- FACTS -->
+    <section class="facts" aria-label="At a glance">
+      <div class="fact reveal"><span class="fact-n" data-count="18">18</span><span class="fact-l">projects shipped in the 30-day i2i Academy program</span></div>
+      <div class="fact reveal"><span class="fact-n">4<sup>th</sup></span><span class="fact-l">year, Information Systems Engineering at Kocaeli University</span></div>
+      <div class="fact reveal"><span class="fact-n">Java</span><span class="fact-l">is home — with Python, C#, TypeScript and SQL close by</span></div>
+    </section>
+
+    <!-- WORK -->
+    <section class="section" id="work">
+      <div class="section-head">
+        <p class="kicker">01 — Selected work</p>
+        <h2 class="reveal">Things I built, and the one decision that mattered in each.</h2>
+      </div>
+
+      <div class="work">
+        <!-- featured: CryptoPal -->
+        <article class="card card-feature reveal">
+          <div class="card-art">
+            <svg viewBox="0 0 520 250" class="diagram" role="img" aria-label="CryptoPal architecture: React UI calls a Spring Boot core that uses Redis, PostgreSQL and Gemini">
+              <g class="d-node"><rect x="16" y="98" width="104" height="54" rx="10" /><text x="68" y="122">React UI</text><text x="68" y="139" class="d-sub">TypeScript</text></g>
+              <g class="d-node d-core"><rect x="186" y="84" width="140" height="82" rx="12" /><text x="256" y="118">Spring Boot</text><text x="256" y="136" class="d-sub">modular monolith</text></g>
+              <g class="d-node"><rect x="392" y="18" width="112" height="50" rx="10" /><text x="448" y="40">Redis</text><text x="448" y="56" class="d-sub">sessions · prices</text></g>
+              <g class="d-node d-truth"><rect x="392" y="100" width="112" height="50" rx="10" /><text x="448" y="122">PostgreSQL</text><text x="448" y="138" class="d-sub">source of truth</text></g>
+              <g class="d-node"><rect x="392" y="182" width="112" height="50" rx="10" /><text x="448" y="204">Gemini</text><text x="448" y="220" class="d-sub">AI assistant</text></g>
+              <path class="d-edge" d="M120 125h66" /><path class="d-edge" d="M326 110 392 43" /><path class="d-edge d-edge-strong" d="M326 125h66" /><path class="d-edge" d="M326 140l66 67" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Internship · i2i Systems</p>
+            <h3>CryptoPal</h3>
+            <p>Crypto trading platform with live prices, portfolios and an AI market assistant. PostgreSQL is the
+              <strong>only</strong> source of truth for balances and trades; Redis holds nothing but sessions and the
+              15-second price ticks, so a cache flush can never cost anyone money.</p>
+            <ul class="tags"><li>Spring Boot</li><li>React</li><li>Redis</li><li>PostgreSQL</li><li>Testcontainers</li></ul>
+            <a class="link" href="https://github.com/nuhregaibunsal/i2i-Academy-CoinPulse-17" target="_blank" rel="noopener">Source<svg class="icon"><use href="#i-arrow" /></svg></a>
+          </div>
+        </article>
+
+        <!-- VoltWise -->
+        <article class="card card-tall reveal">
+          <div class="card-art">
+            <svg viewBox="0 0 300 200" class="diagram" role="img" aria-label="VoltWise flow: sensors stream through Kafka into Ignite, quota breaches trigger LLM advice by e-mail">
+              <g class="d-node"><rect x="10" y="20" width="96" height="40" rx="9" /><text x="58" y="45">Sensors</text></g>
+              <g class="d-node d-core"><rect x="10" y="80" width="96" height="40" rx="9" /><text x="58" y="105">Kafka</text></g>
+              <g class="d-node"><rect x="10" y="140" width="96" height="40" rx="9" /><text x="58" y="165">Ignite</text></g>
+              <g class="d-node d-truth"><rect x="170" y="80" width="118" height="40" rx="9" /><text x="229" y="105">80% · 100%</text></g>
+              <g class="d-node"><rect x="170" y="140" width="118" height="40" rx="9" /><text x="229" y="165">LLM → e-mail</text></g>
+              <path class="d-edge" d="M58 60v20" /><path class="d-edge" d="M58 120v20" /><path class="d-edge d-edge-strong" d="M106 160c30 0 34-60 64-60" /><path class="d-edge" d="M229 120v20" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Internship · i2i Systems</p>
+            <h3>VoltWise</h3>
+            <p>Smart-home telemetry streamed through Kafka, live state per home kept in Apache Ignite. Crossing 80% or 100%
+              of the energy quota triggers personalised saving advice written by an LLM and sent by e-mail.</p>
+            <ul class="tags"><li>Kafka</li><li>Apache Ignite</li><li>Spring Boot</li><li>Gemini</li></ul>
+            <a class="link" href="https://github.com/nuhregaibunsal/i2i-Academy-VoltiHome-18" target="_blank" rel="noopener">Source<svg class="icon"><use href="#i-arrow" /></svg></a>
+          </div>
+        </article>
+
+        <!-- ALPR -->
+        <article class="card card-photo reveal">
+          <img src="assets/alpr.jpg" alt="A white car with its license plate boxed in green and read as 34FRK052" loading="lazy" width="515" height="388" />
+          <div class="card-body">
+            <p class="card-tag">Computer vision</p>
+            <h3>Plate reader, the classical way</h3>
+            <p>Grayscale, blur, Canny edges and contour geometry find the plate — no detector network. OCR only reads the crop.</p>
+            <ul class="tags"><li>OpenCV</li><li>EasyOCR</li><li>Python</li></ul>
+            <a class="link" href="https://github.com/nuhregaibunsal/i2i-Academy-AppliedImageProcessing-9" target="_blank" rel="noopener">Source<svg class="icon"><use href="#i-arrow" /></svg></a>
+          </div>
+        </article>
+
+        <!-- Driftline -->
+        <article class="card card-game reveal">
+          <a class="game-shot" href="https://nuhregaibunsal.github.io/i2i-Academy-ThreeJS-12/" target="_blank" rel="noopener" aria-label="Play Driftline (opens the game in a new tab)">
+            <img src="assets/driftline.jpg" alt="Driftline gameplay: a neon ship racing down a glowing grid toward a striped sun" loading="lazy" width="960" height="540" />
+            <span class="play"><svg class="icon"><use href="#i-play" /></svg>Play</span>
+          </a>
+          <div class="card-body">
+            <p class="card-tag">Side project · WebGL</p>
+            <h3>Driftline</h3>
+            <p>A synthwave runner in React Three Fiber with a custom grid shader, bloom, combos and touch steering.</p>
+            <ul class="tags"><li>three.js</li><li>R3F</li><li>GLSL</li></ul>
+          </div>
+        </article>
+
+        <!-- smaller list -->
+        <div class="more reveal">
+          <h3 class="more-title">Also worth a look</h3>
+          <ul class="more-list">
+            <li>
+              <a href="https://github.com/EmirKaraman24/dispatcher-api-gateway" target="_blank" rel="noopener">
+                <span class="more-name">Dispatcher API Gateway <span class="team">team</span></span>
+                <span class="more-desc">Three Flask services on a private Docker network, reachable only through a gateway that checks JWTs, rate-limits per IP and reports to Prometheus & Grafana.</span>
+                <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/nuhregaibunsal/i2i-Academy-WebScrapingAndETLPipeline-15" target="_blank" rel="noopener">
+                <span class="more-name">Idempotent ETL pipeline</span>
+                <span class="more-desc">Scrape → clean with pandas → upsert into PostgreSQL. Run it twice, get the same table.</span>
+                <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/nuhregaibunsal/i2i-Academy-CICDPipeline-16" target="_blank" rel="noopener">
+                <span class="more-name">Gated CI/CD</span>
+                <span class="more-desc">GitHub Actions runs a pytest unit test and a headless Selenium test, and deploys only if both pass.</span>
+                <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+            </li>
+            <li>
+              <div class="more-static">
+                <span class="more-name">Time-series anomaly detection <span class="team">team</span></span>
+                <span class="more-desc">An explainable PAA/SAX probabilistic automaton against 1D-CNN and LSTM on SKAB and BATADAL, with preprocessing fitted on the training split only.</span>
+              </div>
+            </li>
+            <li>
+              <a href="https://github.com/nuhregaibunsal/Veritabani-Yonetim-Sistemleri-Grup-145-Proje" target="_blank" rel="noopener">
+                <span class="more-name">TechStore</span>
+                <span class="more-desc">Nine-table schema and a PHP + MySQL store on top, with hashed passwords and separate seller and customer roles.</span>
+                <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/nuhregaibunsal/Otonom-Resim-Gruplandirma" target="_blank" rel="noopener">
+                <span class="more-name">Autonomous image grouping</span>
+                <span class="more-desc">MobileNetV2 features + K-Means, cluster count chosen by the elbow method, served as Flask services in Docker.</span>
+                <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/nuhregaibunsal/keep-on-mining-bot" target="_blank" rel="noopener">
+                <span class="more-name">Keep on Mining bot</span>
+                <span class="more-desc">Screen-reading game bot with an upgrade planner, a watchdog and a local web dashboard.</span>
+                <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section section-alt" id="experience">
+      <div class="section-head">
+        <p class="kicker">02 — Experience & education</p>
+        <h2 class="reveal">Where I learned it.</h2>
+      </div>
+      <ol class="timeline">
+        <li class="reveal">
+          <span class="when">Jun – Jul 2026</span>
+          <div>
+            <h3>Software Engineering Intern · i2i Systems</h3>
+            <p class="where">YTÜ Davutpaşa Technopark, İstanbul</p>
+            <p>Joined the i2i Academy program and worked through 18 individual projects across backend, cloud, data
+              engineering, testing and AI — REST APIs with Swagger, Oracle PL/SQL, Redis, Kafka, Apache Ignite, Docker,
+              GCP virtual machines, OpenCV and NLP, ending with the CryptoPal and VoltWise capstones.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="when">2023 – now</span>
+          <div>
+            <h3>Information Systems Engineering · Kocaeli University</h3>
+            <p class="where">4th-year student</p>
+            <p>Coursework in software development, databases, web technologies and cloud computing.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="when">2019 – 2023</span>
+          <div>
+            <h3>Information Technologies · Sabancı Vocational and Technical High School</h3>
+            <p class="where">Kocaeli</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section-head">
+        <p class="kicker">03 — Toolbox</p>
+        <h2 class="reveal">What I reach for.</h2>
+      </div>
+      <div class="skills">
+        <div class="skill-group skill-wide reveal">
+          <h3>Languages</h3>
+          <p class="skill-list"><span>Java</span><span>Python</span><span>C#</span><span>PHP</span><span>JavaScript / TypeScript</span><span>SQL — PostgreSQL, Oracle PL/SQL, MySQL</span></p>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Backend & data</h3>
+          <p class="skill-list"><span>Spring Boot</span><span>Flask</span><span>Apache Kafka</span><span>Redis</span><span>Apache Ignite</span><span>MongoDB</span><span>pandas</span><span>TensorFlow</span></p>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Ops & quality</h3>
+          <p class="skill-list"><span>Docker & Compose</span><span>GitHub Actions</span><span>Prometheus & Grafana</span><span>JUnit</span><span>pytest</span><span>Selenium</span></p>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Web</h3>
+          <p class="skill-list"><span>React</span><span>REST APIs</span><span>Swagger / OpenAPI</span><span>HTML & CSS</span><span>three.js</span></p>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Spoken</h3>
+          <p class="skill-list"><span>Turkish — native</span><span>English — intermediate</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <p class="kicker">04 — Contact</p>
+      <h2 class="reveal">Have a backend that needs<br /><em>a careful pair of hands?</em></h2>
+      <a class="mail reveal" href="mailto:nuhregaibunsal@gmail.com"><svg class="icon"><use href="#i-mail" /></svg>nuhregaibunsal@gmail.com</a>
+      <div class="contact-actions reveal">
+        <a class="btn" href="assets/Nuh-Regaib-Unsal-CV.pdf" download><svg class="icon"><use href="#i-download" /></svg>Download CV (PDF)</a>
+        <a class="btn btn-ghost" href="https://github.com/nuhregaibunsal" target="_blank" rel="noopener"><svg class="icon"><use href="#i-github" /></svg>GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Nuh Regaib Ünsal</span>
+    <span>Hand-built HTML, CSS and a little canvas. No framework.</span>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
